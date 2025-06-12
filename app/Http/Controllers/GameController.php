@@ -30,6 +30,16 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
+        
+        // Verificar si el usuario ya tiene una sala activa
+        $activeGame = Game::whereHas('boards', function($q) use ($userId) {
+            $q->where('user_id', $userId);
+        })->where('status', 'waiting')->first();
+
+        if ($activeGame) {
+            return response()->json(['message' => 'Ya tienes una sala activa esperando jugadores'], 400);
+        }
+
         return DB::transaction(function() use ($userId) {
             $game = Game::create(['status' => 'waiting']);
             // Generar barcos aleatorios para el tablero
@@ -48,6 +58,19 @@ class GameController extends Controller
     public function join(Request $request, $gameId)
     {
         $userId = Auth::id();
+        
+        // Verificar si el usuario ya está en cualquier partida activa (waiting o playing)
+        $activeGame = Game::whereHas('boards', function($q) use ($userId) {
+            $q->where('user_id', $userId);
+        })->whereIn('status', ['waiting', 'playing'])->first();
+
+        if ($activeGame) {
+            return response()->json([
+                'message' => 'Ya estás en una partida activa. No puedes unirte a otra partida.',
+                'gameId' => $activeGame->id
+            ], 400);
+        }
+
         $game = Game::findOrFail($gameId);
         if ($game->boards()->where('user_id', $userId)->exists()) {
             return response()->json(['message' => 'Ya estás en este juego'], 400);
@@ -63,8 +86,20 @@ class GameController extends Controller
             'ships' => $ships,
             'shots' => [],
         ]);
+        
         $game->update(['status' => $game->boards()->count() == 2 ? 'playing' : 'waiting']);
-        return response()->json($game);
+        
+        // Si la partida está completa, notificar a ambos jugadores
+        if ($game->status === 'playing') {
+            $game->load('boards.user');
+            $players = $game->boards->pluck('user.name')->join(' y ');
+            session()->flash('game_started', "¡La partida ha comenzado! Jugadores: $players");
+        }
+        
+        return response()->json([
+            'game' => $game,
+            'message' => $game->status === 'playing' ? '¡La partida ha comenzado!' : 'Te has unido a la partida'
+        ]);
     }
 
     // Ver detalle de un juego

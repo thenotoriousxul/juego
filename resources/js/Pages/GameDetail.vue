@@ -3,6 +3,9 @@
     <h1 class="text-2xl font-bold mb-4">Partida #{{ game.id }}</h1>
     <div v-if="message" class="mb-4 p-2 rounded bg-green-100 text-green-800 border border-green-300">{{ message }}</div>
     <div v-if="error" class="mb-4 p-2 rounded bg-red-100 text-red-800 border border-red-300">{{ error }}</div>
+    <div v-if="$page.props.flash.game_started" class="mb-4 p-2 rounded bg-blue-100 text-blue-800 border border-blue-300">
+      {{ $page.props.flash.game_started }}
+    </div>
     <div class="mb-4">
       <span class="font-semibold">Estado:</span>
       <span :class="statusClass(game.status)">{{ statusText(game.status) }}</span>
