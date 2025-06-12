@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Game;
+use App\Models\Board;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+class GameController extends Controller
+{
+    // Listar todos los juegos (en los que participa el usuario o disponibles para unirse)
+    public function index()
+    {
+        $userId = Auth::id();
+        $games = Game::with(['boards.user'])
+            ->whereHas('boards', function($q) use ($userId) {
+                $q->where('user_id', $userId);
+            })
+            ->orWhere('status', 'waiting')
+            ->orderByDesc('created_at')
+            ->get();
+        return inertia('GameList', [
+            'games' => $games
+        ]);
+    }
+
+    // Crear un nuevo juego y asignar el usuario como primer jugador
+    public function store(Request $request)
+    {
+        $userId = Auth::id();
+        return DB::transaction(function() use ($userId) {
+            $game = Game::create(['status' => 'waiting']);
+            // Generar barcos aleatorios para el tablero
+            $ships = $this->generateRandomShips();
+            Board::create([
+                'game_id' => $game->id,
+                'user_id' => $userId,
+                'ships' => $ships,
+                'shots' => [],
+            ]);
+            return response()->json($game, 201);
+        });
+    }
+
+    // Unirse a un juego existente (si hay espacio)
+    public function join(Request $request, $gameId)
+    {
+        $userId = Auth::id();
+        $game = Game::findOrFail($gameId);
+        if ($game->boards()->where('user_id', $userId)->exists()) {
+            return response()->json(['message' => 'Ya estás en este juego'], 400);
+        }
+        if ($game->boards()->count() >= 2) {
+            return response()->json(['message' => 'El juego ya tiene dos jugadores'], 400);
+        }
+        // Generar barcos aleatorios para el tablero
+        $ships = $this->generateRandomShips();
+        Board::create([
+            'game_id' => $game->id,
+            'user_id' => $userId,
+            'ships' => $ships,
+            'shots' => [],
+        ]);
+        $game->update(['status' => $game->boards()->count() == 2 ? 'playing' : 'waiting']);
+        return response()->json($game);
+    }
+
+    // Ver detalle de un juego
+    public function show($gameId)
+    {
+        $userId = Auth::id();
+        $game = Game::with(['boards.user', 'moves'])->findOrFail($gameId);
+        // Validar que el usuario sea jugador de la partida
+        if (!$game->boards->pluck('user_id')->contains($userId)) {
+            abort(403, 'No tienes permiso para ver esta partida');
+        }
+        return inertia('GameDetail', [
+            'game' => $game
+        ]);
+    }
+
+    // Generar barcos aleatorios para el tablero (8x8, 15 barcos)
+    private function generateRandomShips()
+    {
+        $ships = [];
+        $positions = [];
+        while (count($ships) < 15) {
+            $row = chr(rand(65, 72)); // A-H
+            $col = rand(1, 8);
+            $pos = $row . $col;
+            if (!in_array($pos, $positions)) {
+                $ships[] = $pos;
+                $positions[] = $pos;
+            }
+        }
+        return $ships;
+    }
+}

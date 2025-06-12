@@ -35,6 +35,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Rutas para el juego naval
+    Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->name('games.index');
+    Route::post('/games', [\App\Http\Controllers\GameController::class, 'store'])->name('games.store');
+    Route::post('/games/{game}/join', [\App\Http\Controllers\GameController::class, 'join'])->name('games.join');
+    Route::get('/games/{game}', [\App\Http\Controllers\GameController::class, 'show'])->name('games.show');
+
+    Route::get('/games/{game}/board/{user}', [\App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
+
+    Route::post('/games/{game}/move', [\App\Http\Controllers\MoveController::class, 'store'])->name('moves.store');
+    Route::get('/games/{game}/history', [\App\Http\Controllers\MoveController::class, 'history'])->name('moves.history');
+
+    Route::get('/stats', [\App\Http\Controllers\ProfileController::class, 'stats'])->name('user.stats');
+    Route::get('/history/{game}', [\App\Http\Controllers\ProfileController::class, 'gameHistory'])->name('user.gameHistory');
 });
 
 
