@@ -132,4 +132,49 @@ class GameController extends Controller
         }
         return $ships;
     }
+
+    // Manejar la rendición de un jugador
+    public function surrender($gameId)
+    {
+        $userId = auth()->id();
+        $game = Game::with('boards')->findOrFail($gameId);
+        
+        if (!$game->boards->contains('user_id', $userId)) {
+            return response()->json(['message' => 'No eres un jugador de esta partida'], 403);
+        }
+        
+        if ($game->status !== 'playing') {
+            return response()->json(['message' => 'La partida no está en curso'], 400);
+        }
+        
+        $rivalBoard = $game->boards->where('user_id', '!=', $userId)->first();
+        
+        $game->status = 'finished';
+        $game->winner_id = $rivalBoard->user_id;
+        $game->save();
+        
+        return response()->json(['message' => 'Te has rendido. La partida ha terminado.']);
+    }
+
+    public function destroy($gameId)
+    {
+        $userId = auth()->id();
+        $game = Game::with('boards')->findOrFail($gameId);
+        
+        if (!$game->boards->contains('user_id', $userId)) {
+            return response()->json(['message' => 'No eres un jugador de esta partida'], 403);
+        }
+        
+        if ($game->status !== 'waiting') {
+            return response()->json(['message' => 'Solo se pueden cancelar partidas en espera'], 400);
+        }
+        
+        if ($game->boards->count() > 1) {
+            return response()->json(['message' => 'No se puede cancelar una partida con dos jugadores'], 400);
+        }
+        
+        $game->delete();
+        
+        return response()->json(['message' => 'Partida cancelada exitosamente']);
+    }
 }

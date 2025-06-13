@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\MoveController;
 
 
 /*
@@ -24,31 +26,33 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'auth' => [
+            'user' => auth()->user()
+        ]
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Rutas para el juego naval
-    Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->name('games.index');
-    Route::post('/games', [\App\Http\Controllers\GameController::class, 'store'])->name('games.store');
-    Route::post('/games/{game}/join', [\App\Http\Controllers\GameController::class, 'join'])->name('games.join');
-    Route::get('/games/{game}', [\App\Http\Controllers\GameController::class, 'show'])->name('games.show');
+    Route::get('/games', [GameController::class, 'index'])->name('games.index');
+    Route::post('/games', [GameController::class, 'store'])->name('games.store');
+    Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
+    Route::post('/games/{game}/join', [GameController::class, 'join'])->name('games.join');
+    Route::post('/games/{game}/move', [MoveController::class, 'store'])->name('games.move');
+    Route::post('/games/{game}/surrender', [GameController::class, 'surrender'])->name('games.surrender');
+    Route::delete('/games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
 
     Route::get('/games/{game}/board/{user}', [\App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
 
-    Route::post('/games/{game}/move', [\App\Http\Controllers\MoveController::class, 'store'])->name('moves.store');
-    Route::get('/games/{game}/history', [\App\Http\Controllers\MoveController::class, 'history'])->name('moves.history');
-
-    Route::get('/stats', [\App\Http\Controllers\ProfileController::class, 'stats'])->name('user.stats');
-    Route::get('/history/{game}', [\App\Http\Controllers\ProfileController::class, 'gameHistory'])->name('user.gameHistory');
+    Route::get('/stats', [ProfileController::class, 'stats'])->name('user.stats');
+    Route::get('/history/{game}', [ProfileController::class, 'gameHistory'])->name('user.history');
 });
 
 
