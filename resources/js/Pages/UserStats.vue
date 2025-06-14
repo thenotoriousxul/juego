@@ -53,7 +53,7 @@
 
           <StatsTable 
             :games="showWon ? wonGames : lostGames" 
-            :title="showWon ? 'Partidas Ganadas' : 'Partidas Perdidas'"
+            :type="showWon ? 'won' : 'lost'"
             @show-history="goToHistory" 
           />
         </div>
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     goToHistory(gameId) {
-      Inertia.visit(`/games/${gameId}/history`);
+      Inertia.visit(`/history/${gameId}`);
     }
   }
 };

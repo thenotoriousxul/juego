@@ -50,7 +50,10 @@ class GameController extends Controller
                 'ships' => $ships,
                 'shots' => [],
             ]);
-            return response()->json($game, 201);
+            return response()->json([
+                'id' => $game->id,
+                'message' => 'Partida creada exitosamente'
+            ], 201);
         });
     }
 

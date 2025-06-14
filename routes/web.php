@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MoveController;
+use App\Http\Controllers\GameHistoryController;
 
 
 /*
@@ -52,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/games/{game}/board/{user}', [\App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
 
     Route::get('/stats', [ProfileController::class, 'stats'])->name('user.stats');
-    Route::get('/history/{game}', [ProfileController::class, 'gameHistory'])->name('user.history');
+    Route::get('/history/{game}', [GameHistoryController::class, 'show'])->name('user.history');
 });
 
 

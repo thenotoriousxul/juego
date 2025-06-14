@@ -24,28 +24,30 @@
 export default {
   name: 'Board',
   props: {
-    board: {
-      type: Object,
-      required: true,
+    ships: {
+      type: Array,
+      default: () => []
+    },
+    shots: {
+      type: Array,
+      default: () => []
     },
     isOwn: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   computed: {
     rows() {
       return ['A','B','C','D','E','F','G','H'];
-    },
+    }
   },
   methods: {
     isShip(row, col) {
-      if (!this.board.ships) return false;
-      return this.board.ships.includes(row + col);
+      return this.ships.includes(row + col);
     },
     isShot(row, col) {
-      if (!this.board.shots) return false;
-      return this.board.shots.includes(row + col);
+      return this.shots.includes(row + col);
     },
     shotClass(row, col) {
       if (this.isShip(row, col)) {
@@ -53,7 +55,7 @@ export default {
       } else {
         return 'bg-blue-300 border-2 border-blue-500'; // fallo
       }
-    },
-  },
+    }
+  }
 };
 </script> 

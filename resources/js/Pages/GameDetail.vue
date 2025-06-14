@@ -75,7 +75,11 @@
           </div>
 
           <div class="mt-8 text-center">
-            <button @click="goBack" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700 transition">
+            <button 
+              v-if="game.status === 'finished'"
+              @click="goBack" 
+              class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700 transition"
+            >
               Volver a la lista
             </button>
           </div>

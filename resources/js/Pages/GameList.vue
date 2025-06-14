@@ -150,6 +150,7 @@ export default {
       showCancelModal: false,
       gameToCancel: null,
       pollingInterval: null,
+      isRedirecting: false,
     };
   },
   mounted() {
@@ -173,9 +174,22 @@ export default {
       }
     },
     refreshGames() {
-      // Solo actualizar si no hay operaciones en curso
-      if (!this.loading) {
-        Inertia.reload({ only: ['games'] });
+      // Solo actualizar si no hay operaciones en curso y no estamos en proceso de redirección
+      if (!this.loading && !this.isRedirecting) {
+        this.isRedirecting = true;
+        Inertia.reload({ only: ['games'] }).then(() => {
+          // Verificar si alguna partida del usuario cambió a estado 'playing'
+          const userGames = this.games.filter(game => 
+            game.boards.some(board => board.user_id === this.$page.props.auth.user.id)
+          );
+          
+          const playingGame = userGames.find(game => game.status === 'playing');
+          if (playingGame) {
+            Inertia.visit(`/games/${playingGame.id}`);
+          } else {
+            this.isRedirecting = false;
+          }
+        });
       }
     },
     createGame() {
@@ -183,10 +197,10 @@ export default {
       this.error = '';
       this.message = '';
       axios.post('/games')
-        .then(() => {
+        .then(response => {
           this.message = '¡Partida creada exitosamente!';
-          // Recargar inmediatamente después de crear una partida
-          this.refreshGames();
+          // Redirigir inmediatamente a la vista de la partida
+          Inertia.visit(`/games/${response.data.id}`);
         })
         .catch(err => {
           this.error = err.response?.data?.message || 'Error al crear partida';
@@ -204,9 +218,16 @@ export default {
           this.message = response.data.message;
           // Recargar inmediatamente después de unirse a una partida
           this.refreshGames();
-          setTimeout(() => {
+          
+          // Si la partida está en estado 'playing', redirigir inmediatamente
+          if (response.data.game && response.data.game.status === 'playing') {
             Inertia.visit(`/games/${gameId}`);
-          }, 800);
+          } else {
+            // Si aún está en espera, esperar un momento antes de recargar
+            setTimeout(() => {
+              this.refreshGames();
+            }, 1000);
+          }
         })
         .catch(err => {
           this.error = err.response?.data?.message || 'Error al unirse a la partida';

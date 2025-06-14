@@ -65,22 +65,82 @@ class ProfileController extends Controller
     // Página de estadísticas del usuario
     public function stats()
     {
-        $userId = Auth::id();
-        $games = Game::with(['boards.user', 'moves'])
-            ->whereHas('boards', function($q) use ($userId) {
-                $q->where('user_id', $userId);
+        $userId = auth()->id();
+        
+        // Obtener todas las partidas del usuario
+        $games = Game::with(['boards.user', 'moves.user', 'winner'])
+            ->whereHas('boards', function($query) use ($userId) {
+                $query->where('user_id', $userId);
             })
             ->where('status', 'finished')
             ->orderByDesc('created_at')
             ->get();
-        $won = $games->where('winner_id', $userId)->values();
-        $lost = $games->where('winner_id', '!=', $userId)->values();
-        return inertia('UserStats', [
-            'won' => $won->count(),
-            'lost' => $lost->count(),
+
+        // Separar partidas ganadas y perdidas
+        $wonGames = $games->filter(function($game) use ($userId) {
+            return $game->winner_id === $userId;
+        })->map(function($game) use ($userId) {
+            $opponent = $game->boards->firstWhere('user_id', '!=', $userId);
+            return [
+                'id' => $game->id,
+                'opponent' => $opponent && $opponent->user ? $opponent->user->name : 'Jugador desconocido',
+                'created_at' => $game->created_at->format('d/m/Y H:i'),
+                'moves_count' => $game->moves->count(),
+                'my_board' => [
+                    'ships' => $game->boards->firstWhere('user_id', $userId)->ships ?? [],
+                    'shots' => $game->boards->firstWhere('user_id', $userId)->shots ?? []
+                ],
+                'opponent_board' => [
+                    'ships' => $opponent->ships ?? [],
+                    'shots' => $opponent->shots ?? []
+                ],
+                'moves' => $game->moves->sortBy('created_at')->map(function($move) {
+                    return [
+                        'id' => $move->id,
+                        'position' => $move->position,
+                        'hit' => $move->hit,
+                        'shooter' => $move->user->name,
+                        'created_at' => $move->created_at->format('H:i:s')
+                    ];
+                })->values()
+            ];
+        })->values();
+
+        $lostGames = $games->filter(function($game) use ($userId) {
+            return $game->winner_id !== $userId;
+        })->map(function($game) use ($userId) {
+            $opponent = $game->boards->firstWhere('user_id', '!=', $userId);
+            return [
+                'id' => $game->id,
+                'opponent' => $opponent && $opponent->user ? $opponent->user->name : 'Jugador desconocido',
+                'created_at' => $game->created_at->format('d/m/Y H:i'),
+                'moves_count' => $game->moves->count(),
+                'my_board' => [
+                    'ships' => $game->boards->firstWhere('user_id', $userId)->ships ?? [],
+                    'shots' => $game->boards->firstWhere('user_id', $userId)->shots ?? []
+                ],
+                'opponent_board' => [
+                    'ships' => $opponent->ships ?? [],
+                    'shots' => $opponent->shots ?? []
+                ],
+                'moves' => $game->moves->sortBy('created_at')->map(function($move) {
+                    return [
+                        'id' => $move->id,
+                        'position' => $move->position,
+                        'hit' => $move->hit,
+                        'shooter' => $move->user->name,
+                        'created_at' => $move->created_at->format('H:i:s')
+                    ];
+                })->values()
+            ];
+        })->values();
+
+        return Inertia::render('UserStats', [
+            'won' => $wonGames->count(),
+            'lost' => $lostGames->count(),
             'total' => $games->count(),
-            'wonGames' => $won,
-            'lostGames' => $lost,
+            'wonGames' => $wonGames,
+            'lostGames' => $lostGames,
         ]);
     }
 
