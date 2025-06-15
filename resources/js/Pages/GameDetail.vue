@@ -24,11 +24,11 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div class="bg-white/5 backdrop-blur-sm rounded-lg p-4">
               <h2 class="font-semibold text-white mb-4 text-center">Tu tablero</h2>
-              <Board :board="myBoard" :is-own="true" />
+              <Board :ships="myBoard.ships" :shots="myBoard.shots" :is-own="true" />
             </div>
             <div class="bg-white/5 backdrop-blur-sm rounded-lg p-4">
               <h2 class="font-semibold text-white mb-4 text-center">Tablero rival</h2>
-              <Board :board="rivalBoard" :is-own="false" />
+              <Board :ships="rivalBoard.ships" :shots="rivalBoard.shots" :is-own="false" />
             </div>
           </div>
 

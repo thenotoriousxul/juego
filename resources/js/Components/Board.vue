@@ -24,13 +24,13 @@
 export default {
   name: 'Board',
   props: {
-    board: {
-      type: Object,
-      required: true,
-      default: () => ({
-        ships: [],
-        shots: []
-      })
+    ships: {
+      type: Array,
+      default: () => []
+    },
+    shots: {
+      type: Array,
+      default: () => []
     },
     isOwn: {
       type: Boolean,
@@ -44,10 +44,10 @@ export default {
   },
   methods: {
     isShip(row, col) {
-      return this.board.ships.includes(row + col);
+      return this.ships.includes(row + col);
     },
     isShot(row, col) {
-      return this.board.shots.includes(row + col);
+      return this.shots.includes(row + col);
     },
     shotClass(row, col) {
       if (this.isShip(row, col)) {
