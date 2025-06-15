@@ -114,6 +114,13 @@ class GameController extends Controller
         if (!$game->boards->pluck('user_id')->contains($userId)) {
             abort(403, 'No tienes permiso para ver esta partida');
         }
+
+        // Asegurarnos de que los arrays ships y shots estén inicializados
+        foreach ($game->boards as $board) {
+            $board->ships = $board->ships ?? [];
+            $board->shots = $board->shots ?? [];
+        }
+        
         return inertia('GameDetail', [
             'game' => $game
         ]);
