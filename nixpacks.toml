@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = ['nodejs', 'php', 'composer', 'php82Extensions.mysql', 'php82Extensions.pdo_mysql']
+
+[phases.install]
+cmds = [
+  'composer install --no-dev --optimize-autoloader',
+  'npm install',
+  'npm run build'
+]
+
+[phases.build]
+cmds = [
+  'php artisan optimize',
+  'php artisan config:cache',
+  'php artisan route:cache'
+]
+
+[start]
+cmd = 'vendor/bin/heroku-php-apache2 public/' 
