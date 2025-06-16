@@ -1,98 +1,97 @@
-<script>
+<script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import MainMenu from '@/Components/MainMenu.vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
-export default {
-  components: {
-    Head,
-    Link,
-    MainMenu
+defineProps({
+  canLogin: {
+    type: Boolean,
   },
-  props: {
-    auth: {
-      type: Object,
-      required: true
-    },
-    canLogin: Boolean,
-    canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+  canRegister: {
+    type: Boolean,
   },
-};
+});
 </script>
 
 <template>
-    <Head title="Batalla Naval" />
+  <Head title="Batalla Naval" />
 
-    <div class="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800">
-        <MainMenu :auth="auth" />
-
-        <main class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white/10 backdrop-blur-lg overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="p-6 text-white">
-                        <h1 class="text-4xl font-bold text-center mb-8">¡Bienvenido a Batalla Naval!</h1>
-                        
-                        <div class="text-center">
-                            <template v-if="auth.user">
-                                <p class="text-xl mb-4">¡Capitán {{ auth.user.name }}, sus barcos están listos para zarpar!</p>
-                                <div class="space-x-4">
-
-                                    <Link
-                                        :href="route('games.index')"
-                                        class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md text-lg font-medium"
-                                    >
-                                        Nueva Partida
-                                    </Link>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <p class="text-xl mb-4">¡Únete a la flota y comienza tu aventura naval!</p>
-                                <div class="space-x-4">
-                                    <Link
-                                        :href="route('login')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md text-lg font-medium"
-                                    >
-                                        Iniciar Sesión
-                                    </Link>
-                                    <Link
-                                        :href="route('register')"
-                                        class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md text-lg font-medium"
-                                    >
-                                        Alistarse
-                                    </Link>
-                                </div>
-                            </template>
-                        </div>
-
-                        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="bg-white/5 p-6 rounded-lg">
-                                <h3 class="text-xl font-semibold mb-2">Estrategia Naval</h3>
-                                <p class="text-gray-300">Coloca tus barcos estratégicamente y derrota a tu oponente en este clásico juego de batalla naval.</p>
-                            </div>
-                            <div class="bg-white/5 p-6 rounded-lg">
-                                <h3 class="text-xl font-semibold mb-2">Multijugador</h3>
-                                <p class="text-gray-300">Juega contra otros capitanes en tiempo real y demuestra tus habilidades tácticas.</p>
-                            </div>
-                            <div class="bg-white/5 p-6 rounded-lg">
-                                <h3 class="text-xl font-semibold mb-2">Estadísticas</h3>
-                                <p class="text-gray-300">Sigue tu progreso y conviértete en el almirante más temido de los mares.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+  <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black relative overflow-hidden">
+    <!-- Elementos decorativos -->
+    <div class="absolute inset-0 z-0">
+      <!-- Barcos decorativos -->
+      <div class="absolute bottom-20 right-20 w-32 h-32 opacity-40">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
+          <path fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
+          <path fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
+          <path fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
+        </svg>
+      </div>
+      <div class="absolute bottom-10 right-40 w-28 h-28 opacity-40">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
+          <path fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
+          <path fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
+          <path fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
+        </svg>
+      </div>
+      <div class="absolute bottom-30 right-0 w-24 h-24 opacity-40">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
+          <path fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
+          <path fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
+          <path fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
+        </svg>
+      </div>
     </div>
+
+    <div class="relative z-10">
+      <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+        <Link v-if="canLogin" :href="route('login')" class="font-semibold text-amber-600 hover:text-amber-400 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 font-pirata">Iniciar Sesión</Link>
+
+        <Link v-if="canRegister" :href="route('register')" class="ml-4 font-semibold text-amber-600 hover:text-amber-400 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 font-pirata">Registrarse</Link>
+      </div>
+
+      <div class="max-w-7xl mx-auto p-6 lg:p-8">
+        <div class="flex justify-center">
+          <ApplicationLogo class="w-20 h-20 text-amber-600" />
+        </div>
+
+        <div class="mt-8 bg-gray-900/50 backdrop-blur-sm overflow-hidden shadow-xl sm:rounded-lg border-2 border-amber-900">
+          <div class="p-6 text-center">
+            <h1 class="text-4xl font-bold text-amber-600 mb-4 font-pirata">¡Bienvenido a Batalla Naval!</h1>
+            <p class="text-gray-300 text-lg mb-6">El juego de estrategia naval más emocionante del Caribe</p>
+            
+            <div class="flex justify-center space-x-4">
+              <Link v-if="canLogin" :href="route('login')" class="bg-amber-900 hover:bg-amber-800 text-white px-6 py-3 rounded-lg text-lg font-medium transition-colors duration-200 font-pirata">
+                Iniciar Sesión
+              </Link>
+              <Link v-if="canRegister" :href="route('register')" class="bg-amber-900 hover:bg-amber-800 text-white px-6 py-3 rounded-lg text-lg font-medium transition-colors duration-200 font-pirata">
+                Registrarse
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
-.bg-dots-darker {
-    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+.font-pirata {
+  font-family: 'Pirata One', cursive;
 }
-@media (prefers-color-scheme: dark) {
-    .dark\:bg-dots-lighter {
-        background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
-    }
+
+/* Efecto de brillo en los barcos */
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
+  100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
+}
+
+svg {
+  animation: glow 4s infinite;
 }
 </style>

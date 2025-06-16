@@ -114,6 +114,14 @@ class GameController extends Controller
         if (!$game->boards->pluck('user_id')->contains($userId)) {
             abort(403, 'No tienes permiso para ver esta partida');
         }
+        
+        // Si la petición es AJAX, devolver JSON
+        if (request()->ajax()) {
+            return response()->json([
+                'game' => $game
+            ]);
+        }
+        
         return inertia('GameDetail', [
             'game' => $game
         ]);
