@@ -27,7 +27,7 @@
       <div class="max-w-7xl mx-auto p-6 lg:p-8">
         <div class="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-900">
           <h1 class="text-3xl font-bold text-amber-600 mb-6 text-center">
-            Taberna de los Corsarios
+            Bienvenido a Batalla Naval
           </h1>
           
           <div class="mb-6 text-center">

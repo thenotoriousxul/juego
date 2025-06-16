@@ -89,32 +89,15 @@
           </div>
 
           <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 mb-8 border border-amber-900">
-            <StatsChart :won="won" :lost="lost" :total="total" />
+            <StatsChart 
+              :won="won" 
+              :lost="lost" 
+              :total="total"
+              @update-type="updateType" 
+            />
           </div>
 
           <div class="flex justify-center space-x-4 mb-6">
-            <button 
-              @click="showWon = true" 
-              :class="[
-                'px-4 py-2 rounded-lg transition',
-                showWon 
-                  ? 'bg-amber-900 text-white' 
-                  : 'bg-gray-800/50 text-amber-600 hover:bg-gray-800/70 border border-amber-900'
-              ]"
-            >
-              Victorias
-            </button>
-            <button 
-              @click="showWon = false" 
-              :class="[
-                'px-4 py-2 rounded-lg transition',
-                !showWon 
-                  ? 'bg-amber-900 text-white' 
-                  : 'bg-gray-800/50 text-amber-600 hover:bg-gray-800/70 border border-amber-900'
-              ]"
-            >
-              Derrotas
-            </button>
           </div>
 
           <StatsTable 
@@ -176,6 +159,9 @@ export default {
   methods: {
     goToHistory(gameId) {
       Inertia.visit(`/history/${gameId}`);
+    },
+    updateType(type) {
+      this.showWon = type === 'won';
     }
   }
 };

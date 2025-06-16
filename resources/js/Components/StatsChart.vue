@@ -1,108 +1,71 @@
 <template>
-  <div class="bg-gray-800/50 rounded-lg shadow p-6 max-w-md mx-auto border border-amber-900">
-    <h2 class="text-xl font-bold mb-4 text-center text-amber-600">Estadísticas de Partidas</h2>
-    <canvas ref="chart" class="mb-4" style="max-height: 300px;"></canvas>
-    <div class="flex justify-between text-sm">
-      <div class="text-amber-600">Ganados: <span class="font-bold text-green-400">{{ won }}</span></div>
-      <div class="text-amber-600">Perdidos: <span class="font-bold text-red-400">{{ lost }}</span></div>
-      <div class="text-amber-600">Total: <span class="font-bold text-blue-400">{{ total }}</span></div>
+  <div class="relative">
+    <p class="text-amber-600 text-center mb-4 font-semibold">Presiona las gráficas para ver el historial de partidas</p>
+    <div class="flex justify-center space-x-8">
+      <!-- Gráfica de victorias -->
+      <div 
+        class="w-32 h-32 relative cursor-pointer transform transition-transform hover:scale-110"
+        @click="$emit('update-type', 'won')"
+      >
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-16 h-full bg-gray-800 rounded-t-lg relative overflow-hidden">
+            <div 
+              class="absolute bottom-0 left-0 right-0 bg-green-500 transition-all duration-500"
+              :style="{ height: `${(won / total) * 100}%` }"
+            ></div>
+          </div>
+        </div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+          <span class="text-2xl font-bold">{{ Math.round((won / total) * 100) }}%</span>
+          <span class="text-sm">Victorias</span>
+        </div>
+      </div>
+
+      <!-- Gráfica de derrotas -->
+      <div 
+        class="w-32 h-32 relative cursor-pointer transform transition-transform hover:scale-110"
+        @click="$emit('update-type', 'lost')"
+      >
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-16 h-full bg-gray-800 rounded-t-lg relative overflow-hidden">
+            <div 
+              class="absolute bottom-0 left-0 right-0 bg-red-500 transition-all duration-500"
+              :style="{ height: `${(lost / total) * 100}%` }"
+            ></div>
+          </div>
+        </div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+          <span class="text-2xl font-bold">{{ Math.round((lost / total) * 100) }}%</span>
+          <span class="text-sm">Derrotas</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-
 export default {
   name: 'StatsChart',
   props: {
-    won: { type: Number, required: true },
-    lost: { type: Number, required: true },
-    total: { type: Number, default: null },
-  },
-  mounted() {
-    this.renderChart();
-  },
-  methods: {
-    renderChart() {
-      const ctx = this.$refs.chart.getContext('2d');
-      if (this._chart) this._chart.destroy();
-      this._chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Ganados', 'Perdidos'],
-          datasets: [{
-            label: 'Partidas',
-            data: [this.won, this.lost],
-            backgroundColor: [
-              'rgba(34,197,94,0.7)', // verde
-              'rgba(239,68,68,0.7)', // rojo
-            ],
-            borderColor: [
-              'rgba(34,197,94,1)',
-              'rgba(239,68,68,1)',
-            ],
-            borderWidth: 1,
-          }],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: false },
-            tooltip: { 
-              enabled: true,
-              backgroundColor: 'rgba(17, 24, 39, 0.9)',
-              titleColor: '#D97706',
-              bodyColor: '#FCD34D',
-              borderColor: '#92400E',
-              borderWidth: 1,
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: {
-                color: 'rgba(217, 119, 6, 0.1)',
-              },
-              ticks: {
-                color: '#D97706',
-              }
-            },
-            x: {
-              grid: {
-                color: 'rgba(217, 119, 6, 0.1)',
-              },
-              ticks: {
-                color: '#D97706',
-              }
-            }
-          },
-          onClick: (e, elements) => {
-            if (elements.length > 0) {
-              const idx = elements[0].index;
-              if (idx === 0) this.$emit('show-won');
-              if (idx === 1) this.$emit('show-lost');
-            }
-          },
-        },
-      });
+    won: {
+      type: Number,
+      required: true
     },
+    lost: {
+      type: Number,
+      required: true
+    },
+    total: {
+      type: Number,
+      required: true
+    }
   },
-  watch: {
-    won() { this.renderChart(); },
-    lost() { this.renderChart(); },
-  },
-  beforeUnmount() {
-    if (this._chart) this._chart.destroy();
-  },
+  emits: ['update-type']
 };
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
+<style scoped>
+.cursor-pointer {
+  cursor: pointer;
 }
 </style> 

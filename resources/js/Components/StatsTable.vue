@@ -1,4 +1,5 @@
 <template>
+  <h2 class="text-2xl font-bold text-amber-600 mb-4">Partidas {{ type === 'won' ? 'ganadas' : 'perdidas' }}</h2>
   <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden border border-amber-900">
     <div v-if="games.length === 0" class="text-center py-8 text-amber-600">
       No hay partidas para mostrar.

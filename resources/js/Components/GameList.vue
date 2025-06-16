@@ -8,7 +8,7 @@
     </div>
     
     <h2 class="text-3xl font-bold text-amber-600 mb-6 text-center">
-      Taberna de los Corsarios
+      Nueva partida
     </h2>
     
     <div class="space-y-4">
