@@ -24,7 +24,7 @@
     <div class="relative z-10">
       <div class="max-w-7xl mx-auto p-6 lg:p-8">
         <div class="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-900">
-          <h1 class="text-3xl font-bold text-amber-600 font-pirata mb-6 text-center">Historial de Partidas</h1>
+          <h1 class="text-3xl font-bold text-amber-600 mb-6 text-center">Historial de Partidas</h1>
 
           <div class="mb-6">
             <div class="flex justify-between items-center mb-4">
@@ -63,7 +63,7 @@
                   Derrotas
                 </button>
               </div>
-              <div class="text-amber-600 font-pirata text-xl">
+              <div class="text-amber-600 text-xl">
                 Total: {{ filteredGames.length }}
               </div>
             </div>
@@ -111,7 +111,7 @@
           </div>
 
           <div v-if="filteredGames.length === 0" class="text-center py-8">
-            <p class="text-gray-400 font-pirata text-xl">No hay partidas que mostrar</p>
+            <p class="text-gray-400 text-xl">No hay partidas que mostrar</p>
           </div>
         </div>
       </div>
@@ -173,12 +173,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
-
 /* Efecto de brillo en los barcos */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }

@@ -7,8 +7,8 @@
       </svg>
     </div>
     
-    <h2 class="text-3xl font-bold text-amber-600 font-pirata mb-6 text-center">
-      <span class="text-amber-400">⚓</span> Taberna de los Corsarios <span class="text-amber-400">⚓</span>
+    <h2 class="text-3xl font-bold text-amber-600 mb-6 text-center">
+      Taberna de los Corsarios
     </h2>
     
     <div class="space-y-4">
@@ -21,12 +21,12 @@
         </div>
         <div class="flex justify-between items-center">
           <div>
-            <h3 class="text-lg font-semibold text-amber-600 font-pirata">Galeón #{{ game.id }}</h3>
+            <h3 class="text-lg font-semibold text-amber-600">Galeón #{{ game.id }}</h3>
             <p class="text-gray-300 text-sm">Capitán: {{ game.creator.name }}</p>
           </div>
           <div class="flex items-center space-x-2">
             <span :class="{
-              'px-3 py-1 rounded-full text-sm font-pirata': true,
+              'px-3 py-1 rounded-full text-sm': true,
               'bg-green-900/50 text-green-300': game.status === 'active',
               'bg-amber-900/50 text-amber-300': game.status === 'pending',
               'bg-red-900/50 text-red-300': game.status === 'finished'
@@ -38,10 +38,9 @@
             <button
               v-if="game.status === 'pending'"
               @click="$emit('join', game.id)"
-              class="bg-amber-900 hover:bg-amber-800 text-white px-4 py-2 rounded-md text-sm font-pirata transition-colors duration-200 flex items-center space-x-1"
+              class="bg-amber-900 hover:bg-amber-800 text-white px-4 py-2 rounded-md text-sm transition-colors duration-200 flex items-center space-x-1"
             >
-              <span>¡Embarcar!</span>
-              <span class="text-amber-400">⚔️</span>
+              Unirse
             </button>
           </div>
         </div>

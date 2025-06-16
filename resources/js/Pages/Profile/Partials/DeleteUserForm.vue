@@ -40,7 +40,7 @@ const closeModal = () => {
 <template>
     <section class="space-y-6">
         <header>
-            <h2 class="text-lg font-medium text-amber-600 font-pirata">Eliminar Cuenta</h2>
+            <h2 class="text-lg font-medium text-amber-600">Eliminar Cuenta</h2>
 
             <p class="mt-1 text-sm text-gray-300">
                 Una vez que tu cuenta sea eliminada, todos sus recursos y datos serán eliminados permanentemente.
@@ -51,7 +51,7 @@ const closeModal = () => {
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-amber-600 font-pirata">
+                <h2 class="text-lg font-medium text-amber-600">
                     ¿Estás seguro de que quieres eliminar tu cuenta?
                 </h2>
 
@@ -91,9 +91,4 @@ const closeModal = () => {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
 </style>

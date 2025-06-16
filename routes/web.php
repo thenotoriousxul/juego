@@ -49,6 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/games/{game}/move', [MoveController::class, 'store'])->name('games.move');
     Route::post('/games/{game}/surrender', [GameController::class, 'surrender'])->name('games.surrender');
     Route::delete('/games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
+    Route::post('/games/{id}/cancel', [GameController::class, 'cancel'])->name('games.cancel');
 
     Route::get('/games/{game}/board/{user}', [\App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
 

@@ -26,13 +26,13 @@
     <div class="relative z-10">
       <div class="max-w-7xl mx-auto p-6 lg:p-8">
         <div class="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-900">
-          <h1 class="text-3xl font-bold text-amber-600 font-pirata mb-6 text-center">
-            <span class="text-amber-400">⚓</span> Taberna de los Corsarios <span class="text-amber-400">⚓</span>
+          <h1 class="text-3xl font-bold text-amber-600 mb-6 text-center">
+            Taberna de los Corsarios
           </h1>
           
           <div class="mb-6 text-center">
-            <span class="text-amber-600 font-pirata">Navegando como: </span>
-            <span class="text-amber-400 font-pirata">{{ $page.props.auth.user.name }}</span>
+            <span class="text-amber-600">Navegando como: </span>
+            <span class="text-amber-400">{{ $page.props.auth.user.name }}</span>
           </div>
 
           <div v-if="message" class="mb-4 p-3 rounded bg-green-900/50 text-green-300 border border-green-900">{{ message }}</div>
@@ -45,9 +45,9 @@
             <button 
               @click="createGame" 
               :disabled="loading" 
-              class="bg-amber-900 hover:bg-amber-800 text-white px-6 py-3 rounded-lg hover:bg-amber-800 transition disabled:opacity-50 disabled:cursor-not-allowed text-lg font-pirata"
+              class="bg-amber-900 hover:bg-amber-800 text-white px-6 py-3 rounded-lg hover:bg-amber-800 transition disabled:opacity-50 disabled:cursor-not-allowed text-lg"
             >
-              <span class="text-amber-400">⚔️</span> Zarpar en nueva aventura <span class="text-amber-400">⚔️</span>
+              <span class="text-amber-400"></span> Crear nueva partida <span class="text-amber-400"></span>
             </button>
           </div>
 
@@ -56,7 +56,7 @@
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
             </svg>
-            <div class="text-amber-400 mt-2 font-pirata">Cargando galeones...</div>
+            <div class="text-amber-400 mt-2">Cargando galeones...</div>
           </div>
 
           <div v-else>
@@ -64,17 +64,17 @@
               <table class="min-w-full">
                 <thead>
                   <tr>
-                    <th class="py-3 px-4 border-b border-amber-900/50 text-left text-amber-600 font-pirata">ID</th>
-                    <th class="py-3 px-4 border-b border-amber-900/50 text-left text-amber-600 font-pirata">Estado</th>
-                    <th class="py-3 px-4 border-b border-amber-900/50 text-left text-amber-600 font-pirata">Tripulación</th>
-                    <th class="py-3 px-4 border-b border-amber-900/50 text-center text-amber-600 font-pirata">Acciones</th>
+                    <th class="py-3 px-4 border-b border-amber-900/50 text-left text-amber-600">ID</th>
+                    <th class="py-3 px-4 border-b border-amber-900/50 text-left text-amber-600">Estado</th>
+                    <th class="py-3 px-4 border-b border-amber-900/50 text-left text-amber-600">Tripulación</th>
+                    <th class="py-3 px-4 border-b border-amber-900/50 text-center text-amber-600">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="game in games" :key="game.id" class="hover:bg-gray-700/50 transition">
                     <td class="py-3 px-4 border-b border-amber-900/50 text-amber-100">Galeón #{{ game.id }}</td>
                     <td class="py-3 px-4 border-b border-amber-900/50">
-                      <span :class="[statusClass(game.status), 'px-3 py-1 rounded-full text-sm font-pirata']">
+                      <span :class="[statusClass(game.status), 'px-3 py-1 rounded-full text-sm']">
                         {{ statusText(game.status) }}
                       </span>
                     </td>
@@ -82,40 +82,40 @@
                       <div v-for="board in game.boards" :key="board.id" class="text-amber-100 text-sm">
                         {{ board.user ? board.user.name : 'Capitán pendiente' }}
                       </div>
-                      <div v-if="game.boards.length < 2" class="text-amber-400/70 text-sm font-pirata">
+                      <div v-if="game.boards.length < 2" class="text-amber-400/70 text-sm">
                         Esperando tripulación...
                       </div>
                     </td>
                     <td class="py-3 px-4 border-b border-amber-900/50 text-center">
                       <button 
-                        v-if="canJoin(game)" 
+                        v-if="game.status === 'waiting' && game.boards.length < 2 && game.boards[0].user_id !== $page.props.auth.user.id" 
                         @click="joinGame(game.id)" 
                         :disabled="loading" 
-                        class="bg-amber-900 text-white px-4 py-2 rounded hover:bg-amber-800 transition mr-2 disabled:opacity-50 disabled:cursor-not-allowed font-pirata"
+                        class="bg-amber-900 text-white px-4 py-2 rounded hover:bg-amber-800 transition mr-2 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        ¡Embarcar!
+                        Unirse
                       </button>
                       <button 
-                        v-if="canCancel(game)"
+                        v-if="game.status === 'waiting' && game.boards.length === 1 && game.boards[0].user_id === $page.props.auth.user.id"
                         @click="cancelGame(game.id)" 
                         :disabled="loading" 
-                        class="bg-red-900 text-white px-4 py-2 rounded hover:bg-red-800 transition mr-2 disabled:opacity-50 disabled:cursor-not-allowed font-pirata"
+                        class="bg-red-900 text-white px-4 py-2 rounded hover:bg-red-800 transition mr-2 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Abandonar
+                        Cancelar
                       </button>
                       <button 
                         @click="goToGame(game.id)" 
                         :disabled="loading" 
-                        class="bg-amber-900 text-white px-4 py-2 rounded hover:bg-amber-800 transition disabled:opacity-50 disabled:cursor-not-allowed font-pirata"
+                        class="bg-amber-900 text-white px-4 py-2 rounded hover:bg-amber-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Ver galeón
+                        Ver partida
                       </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div v-if="games.length === 0" class="text-center py-8 text-amber-400/70 font-pirata">
+            <div v-if="games.length === 0" class="text-center py-8 text-amber-400/70">
               No hay galeones en el puerto.
             </div>
           </div>
@@ -227,6 +227,12 @@ export default {
         })
         .catch(err => {
           this.error = err.response?.data?.message || 'Error al crear partida';
+          // Si hay un gameId en la respuesta, redirigir a esa partida
+          if (err.response?.data?.gameId) {
+            setTimeout(() => {
+              Inertia.visit(`/games/${err.response.data.gameId}`);
+            }, 1500);
+          }
         })
         .finally(() => {
           this.loading = false;
@@ -254,10 +260,11 @@ export default {
         })
         .catch(err => {
           this.error = err.response?.data?.message || 'Error al unirse a la partida';
+          // Si hay un gameId en la respuesta, redirigir a esa partida
           if (err.response?.data?.gameId) {
             setTimeout(() => {
               Inertia.visit(`/games/${err.response.data.gameId}`);
-            }, 800);
+            }, 1500);
           }
         })
         .finally(() => {

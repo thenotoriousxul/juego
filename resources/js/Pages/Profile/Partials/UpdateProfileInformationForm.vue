@@ -21,7 +21,7 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-amber-600 font-pirata">Información del Perfil</h2>
+            <h2 class="text-lg font-medium text-amber-600">Información del Perfil</h2>
 
             <p class="mt-1 text-sm text-gray-300">
                 Actualiza la información de tu perfil y tu dirección de correo electrónico.
@@ -98,9 +98,4 @@ const form = useForm({
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
 </style>

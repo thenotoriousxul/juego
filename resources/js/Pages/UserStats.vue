@@ -71,19 +71,19 @@
     <div class="py-8 relative z-10">
       <div class="max-w-4xl mx-auto px-4">
         <div class="bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-xl p-6 border-2 border-amber-900">
-          <h1 class="text-3xl font-bold text-amber-600 mb-6 text-center font-pirata">Estadísticas de Batalla</h1>
+          <h1 class="text-3xl font-bold text-amber-600 mb-6 text-center">Estadísticas de Batalla</h1>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 text-center border border-amber-900">
-              <h3 class="text-xl font-semibold text-amber-600 mb-2 font-pirata">Victorias</h3>
+              <h3 class="text-xl font-semibold text-amber-600 mb-2">Victorias</h3>
               <p class="text-3xl font-bold text-green-400">{{ won }}</p>
             </div>
             <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 text-center border border-amber-900">
-              <h3 class="text-xl font-semibold text-amber-600 mb-2 font-pirata">Derrotas</h3>
+              <h3 class="text-xl font-semibold text-amber-600 mb-2">Derrotas</h3>
               <p class="text-3xl font-bold text-red-400">{{ lost }}</p>
             </div>
             <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 text-center border border-amber-900">
-              <h3 class="text-xl font-semibold text-amber-600 mb-2 font-pirata">Total Partidas</h3>
+              <h3 class="text-xl font-semibold text-amber-600 mb-2">Total Partidas</h3>
               <p class="text-3xl font-bold text-blue-400">{{ total }}</p>
             </div>
           </div>
@@ -96,7 +96,7 @@
             <button 
               @click="showWon = true" 
               :class="[
-                'px-4 py-2 rounded-lg transition font-pirata',
+                'px-4 py-2 rounded-lg transition',
                 showWon 
                   ? 'bg-amber-900 text-white' 
                   : 'bg-gray-800/50 text-amber-600 hover:bg-gray-800/70 border border-amber-900'
@@ -107,7 +107,7 @@
             <button 
               @click="showWon = false" 
               :class="[
-                'px-4 py-2 rounded-lg transition font-pirata',
+                'px-4 py-2 rounded-lg transition',
                 !showWon 
                   ? 'bg-amber-900 text-white' 
                   : 'bg-gray-800/50 text-amber-600 hover:bg-gray-800/70 border border-amber-900'
@@ -182,12 +182,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
-
 /* Efecto de brillo en el barco */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }

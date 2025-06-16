@@ -11,7 +11,7 @@ import { Head } from '@inertiajs/vue3';
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-amber-600 leading-tight font-pirata">Perfil</h2>
+            <h2 class="font-semibold text-xl text-amber-600 leading-tight">Perfil</h2>
         </template>
 
         <div class="py-12">

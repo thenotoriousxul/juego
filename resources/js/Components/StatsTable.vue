@@ -1,15 +1,15 @@
 <template>
   <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden border border-amber-900">
-    <div v-if="games.length === 0" class="text-center py-8 text-amber-600 font-pirata">
+    <div v-if="games.length === 0" class="text-center py-8 text-amber-600">
       No hay partidas para mostrar.
     </div>
     <table v-else class="min-w-full">
       <thead>
         <tr>
-          <th class="py-3 px-4 border-b border-amber-900 text-left text-amber-600 font-pirata">Fecha</th>
-          <th class="py-3 px-4 border-b border-amber-900 text-left text-amber-600 font-pirata">Oponente</th>
-          <th class="py-3 px-4 border-b border-amber-900 text-left text-amber-600 font-pirata">Movimientos</th>
-          <th class="py-3 px-4 border-b border-amber-900 text-center text-amber-600 font-pirata">Acciones</th>
+          <th class="py-3 px-4 border-b border-amber-900 text-left text-amber-600">Fecha</th>
+          <th class="py-3 px-4 border-b border-amber-900 text-left text-amber-600">Oponente</th>
+          <th class="py-3 px-4 border-b border-amber-900 text-left text-amber-600">Movimientos</th>
+          <th class="py-3 px-4 border-b border-amber-900 text-center text-amber-600">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -41,7 +41,7 @@
       <div class="sticky top-0 z-10 bg-gray-900/95 backdrop-blur-sm border-b border-amber-900 p-6 rounded-t-xl">
         <div class="flex justify-between items-center">
           <div>
-            <h3 class="text-2xl font-bold text-amber-600 font-pirata">Detalles de la Partida</h3>
+            <h3 class="text-2xl font-bold text-amber-600">Detalles de la Partida</h3>
             <p class="text-amber-400 mt-1">{{ selectedGame.opponent }} - {{ selectedGame.created_at }}</p>
           </div>
           <button @click="closeModal" class="text-amber-600 hover:text-amber-400 transition p-2 rounded-lg hover:bg-gray-800/50">
@@ -58,7 +58,7 @@
           <div class="bg-gray-800/50 rounded-lg p-4 border border-amber-900">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-amber-600 font-pirata">Total de Movimientos</p>
+                <p class="text-amber-600">Total de Movimientos</p>
                 <p class="text-2xl font-bold text-amber-100 mt-1">{{ selectedGame.moves_count }}</p>
               </div>
               <div class="text-4xl text-amber-600">
@@ -71,7 +71,7 @@
           <div class="bg-gray-800/50 rounded-lg p-4 border border-amber-900">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-amber-600 font-pirata">Resultado</p>
+                <p class="text-amber-600">Resultado</p>
                 <p class="text-2xl font-bold mt-1" :class="type === 'won' ? 'text-green-400' : 'text-red-400'">
                   {{ type === 'won' ? 'Victoria' : 'Derrota' }}
                 </p>
@@ -91,7 +91,7 @@
         <!-- Tableros -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-900">
-            <h4 class="text-lg font-semibold text-amber-600 mb-4 text-center font-pirata">Tu tablero</h4>
+            <h4 class="text-lg font-semibold text-amber-600 mb-4 text-center">Tu tablero</h4>
             <Board 
               :ships="selectedGame.my_board.ships" 
               :shots="selectedGame.my_board.shots"
@@ -99,7 +99,7 @@
             />
           </div>
           <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-900">
-            <h4 class="text-lg font-semibold text-amber-600 mb-4 text-center font-pirata">Tablero del oponente</h4>
+            <h4 class="text-lg font-semibold text-amber-600 mb-4 text-center">Tablero del oponente</h4>
             <Board 
               :ships="selectedGame.opponent_board.ships" 
               :shots="selectedGame.opponent_board.shots"
@@ -110,15 +110,15 @@
 
         <!-- Historial de Movimientos -->
         <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-900">
-          <h4 class="text-lg font-semibold text-amber-600 mb-4 font-pirata">Historial de Movimientos</h4>
+          <h4 class="text-lg font-semibold text-amber-600 mb-4">Historial de Movimientos</h4>
           <div class="overflow-x-auto">
             <table class="min-w-full">
               <thead>
                 <tr class="border-b border-amber-900">
-                  <th class="py-3 px-4 text-left text-amber-600 font-pirata">Hora</th>
-                  <th class="py-3 px-4 text-left text-amber-600 font-pirata">Jugador</th>
-                  <th class="py-3 px-4 text-left text-amber-600 font-pirata">Disparó a</th>
-                  <th class="py-3 px-4 text-left text-amber-600 font-pirata">Resultado</th>
+                  <th class="py-3 px-4 text-left text-amber-600">Hora</th>
+                  <th class="py-3 px-4 text-left text-amber-600">Jugador</th>
+                  <th class="py-3 px-4 text-left text-amber-600">Disparó a</th>
+                  <th class="py-3 px-4 text-left text-amber-600">Resultado</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-amber-900/50">
@@ -183,9 +183,4 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
 </style> 

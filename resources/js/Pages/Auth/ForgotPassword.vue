@@ -61,7 +61,7 @@ export default {
       <div class="flex justify-center mb-6">
         <ApplicationLogo class="text-amber-600" />
       </div>
-      <h2 class="text-3xl font-bold text-center text-amber-600 mb-6 font-pirata">Recuperar Contraseña</h2>
+      <h2 class="text-3xl font-bold text-center text-amber-600 mb-6">Recuperar Contraseña</h2>
 
       <div class="mb-4 text-sm text-amber-600">
         ¿Olvidaste tu contraseña? No hay problema. Solo indícanos tu correo electrónico y te enviaremos un enlace para que puedas elegir una nueva.
@@ -97,12 +97,6 @@ export default {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
-
 /* Efecto de brillo en los barcos */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }

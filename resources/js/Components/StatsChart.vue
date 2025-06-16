@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-800/50 rounded-lg shadow p-6 max-w-md mx-auto border border-amber-900">
-    <h2 class="text-xl font-bold mb-4 text-center text-amber-600 font-pirata">Estadísticas de Partidas</h2>
+    <h2 class="text-xl font-bold mb-4 text-center text-amber-600">Estadísticas de Partidas</h2>
     <canvas ref="chart" class="mb-4" style="max-height: 300px;"></canvas>
     <div class="flex justify-between text-sm">
       <div class="text-amber-600">Ganados: <span class="font-bold text-green-400">{{ won }}</span></div>

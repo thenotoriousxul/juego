@@ -82,7 +82,7 @@
     <div class="relative z-10">
       <div class="max-w-7xl mx-auto p-6 lg:p-8">
         <div class="flex justify-between items-center mb-8">
-          <h1 class="text-3xl font-bold text-amber-600 font-pirata">Mis Partidas</h1>
+          <h1 class="text-3xl font-bold text-amber-600">Mis Partidas</h1>
           <Link
             :href="route('games.create')"
             class="bg-amber-900 hover:bg-amber-800 text-white px-6 py-3 rounded-md text-lg font-medium transition-colors duration-200"

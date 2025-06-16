@@ -31,13 +31,16 @@ class GameController extends Controller
     {
         $userId = Auth::id();
         
-        // Verificar si el usuario ya tiene una sala activa
+        // Verificar si el usuario ya tiene una partida activa (waiting o playing)
         $activeGame = Game::whereHas('boards', function($q) use ($userId) {
             $q->where('user_id', $userId);
-        })->where('status', 'waiting')->first();
+        })->whereIn('status', ['waiting', 'playing'])->first();
 
         if ($activeGame) {
-            return response()->json(['message' => 'Ya tienes una sala activa esperando jugadores'], 400);
+            return response()->json([
+                'message' => 'Ya tienes una partida activa. No puedes crear otra hasta que termines o canceles la actual.',
+                'gameId' => $activeGame->id
+            ], 400);
         }
 
         return DB::transaction(function() use ($userId) {
@@ -62,25 +65,33 @@ class GameController extends Controller
     {
         $userId = Auth::id();
         
-        // Verificar si el usuario ya está en cualquier partida activa (waiting o playing)
+        // Verificar si el usuario ya tiene una partida activa (waiting o playing)
         $activeGame = Game::whereHas('boards', function($q) use ($userId) {
             $q->where('user_id', $userId);
         })->whereIn('status', ['waiting', 'playing'])->first();
 
         if ($activeGame) {
             return response()->json([
-                'message' => 'Ya estás en una partida activa. No puedes unirte a otra partida.',
+                'message' => 'Ya tienes una partida activa. No puedes unirte a otra partida hasta que termines o canceles la actual.',
                 'gameId' => $activeGame->id
             ], 400);
         }
 
         $game = Game::findOrFail($gameId);
+        
+        // Verificar que el juego esté en estado waiting
+        if ($game->status !== 'waiting') {
+            return response()->json(['message' => 'Esta partida ya no está disponible para unirse'], 400);
+        }
+        
         if ($game->boards()->where('user_id', $userId)->exists()) {
             return response()->json(['message' => 'Ya estás en este juego'], 400);
         }
+        
         if ($game->boards()->count() >= 2) {
             return response()->json(['message' => 'El juego ya tiene dos jugadores'], 400);
         }
+        
         // Generar barcos aleatorios para el tablero
         $ships = $this->generateRandomShips();
         Board::create([
@@ -109,21 +120,46 @@ class GameController extends Controller
     public function show($gameId)
     {
         $userId = Auth::id();
-        $game = Game::with(['boards.user', 'moves'])->findOrFail($gameId);
+        $game = Game::with(['boards.user', 'moves.user'])->findOrFail($gameId);
         // Validar que el usuario sea jugador de la partida
         if (!$game->boards->pluck('user_id')->contains($userId)) {
             abort(403, 'No tienes permiso para ver esta partida');
         }
         
+        // Transformar movimientos para el frontend
+        $moves = $game->moves->sortBy('created_at')->map(function ($move) {
+            return [
+                'id' => $move->id,
+                'player_id' => $move->user_id,
+                'player_name' => $move->user ? $move->user->name : 'Desconocido',
+                'position' => $move->position,
+                'result' => $move->hit ? 'hit' : 'miss',
+                'hit' => $move->hit,
+                'created_at' => $move->created_at->format('H:i:s'),
+            ];
+        })->values();
+        
         // Si la petición es AJAX, devolver JSON
         if (request()->ajax()) {
             return response()->json([
-                'game' => $game
+                'game' => [
+                    'id' => $game->id,
+                    'status' => $game->status,
+                    'winner_id' => $game->winner_id,
+                    'boards' => $game->boards,
+                    'moves' => $moves,
+                ]
             ]);
         }
         
         return inertia('GameDetail', [
-            'game' => $game
+            'game' => [
+                'id' => $game->id,
+                'status' => $game->status,
+                'winner_id' => $game->winner_id,
+                'boards' => $game->boards,
+                'moves' => $moves,
+            ]
         ]);
     }
 
@@ -187,5 +223,15 @@ class GameController extends Controller
         $game->delete();
         
         return response()->json(['message' => 'Partida cancelada exitosamente']);
+    }
+
+    public function cancel($id)
+    {
+        $game = Game::findOrFail($id);
+        if ($game->status === 'waiting') {
+            $game->status = 'cancelled';
+            $game->save();
+        }
+        return redirect()->route('games.index');
     }
 }

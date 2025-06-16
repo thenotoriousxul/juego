@@ -26,9 +26,9 @@
     <div class="relative z-10">
       <div class="max-w-7xl mx-auto p-6 lg:p-8">
         <div class="flex justify-between items-center mb-8">
-          <h1 class="text-3xl font-bold text-amber-600 font-pirata">Partida #{{ game.id }}</h1>
+          <h1 class="text-3xl font-bold text-amber-600">Partida #{{ game.id }}</h1>
           <div class="flex items-center space-x-4">
-            <span class="text-amber-600 font-pirata text-xl">Turno: {{ game.current_turn }}</span>
+            <span class="text-amber-600 text-xl">Turno: {{ game.current_turn }}</span>
             <span :class="{
               'px-4 py-2 rounded-md text-lg font-medium': true,
               'bg-green-900/50 text-green-300': game.status === 'active',

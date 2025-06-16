@@ -143,12 +143,6 @@ export default {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
-
 /* Efecto de brillo en los barcos */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }

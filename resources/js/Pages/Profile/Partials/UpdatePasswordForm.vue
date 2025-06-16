@@ -36,7 +36,7 @@ const updatePassword = () => {
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-amber-600 font-pirata">Actualizar Contraseña</h2>
+            <h2 class="text-lg font-medium text-amber-600">Actualizar Contraseña</h2>
 
             <p class="mt-1 text-sm text-gray-300">
                 Asegúrate de usar una contraseña larga y segura.
@@ -105,9 +105,4 @@ const updatePassword = () => {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
-
-.font-pirata {
-  font-family: 'Pirata One', cursive;
-}
 </style>

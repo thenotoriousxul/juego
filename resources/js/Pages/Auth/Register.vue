@@ -49,31 +49,30 @@ export default {
   <Head title="Registro" />
 
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden">
-    <!-- Elementos decorativos -->
-    <div class="absolute inset-0 z-0">
-      <!-- Tres barcos navegando juntos -->
-      <div class="absolute bottom-20 right-20 w-32 h-32 opacity-40">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
-          <path fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
-          <path fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
-          <path fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
+    <!-- Animaciones de barcos y olas al fondo -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div class="ship-container">
+        <svg class="ship" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path class="ship-hull" fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
+          <path class="ship-deck" fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
+          <path class="ship-mast" fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
+          <path class="ship-flag" fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
         </svg>
       </div>
-      <div class="absolute bottom-10 right-40 w-28 h-28 opacity-40">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
-          <path fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
-          <path fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
-          <path fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
+      <div class="ship-container ship-container-2">
+        <svg class="ship ship-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path class="ship-hull" fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
+          <path class="ship-deck" fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
+          <path class="ship-mast" fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
+          <path class="ship-flag" fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
         </svg>
       </div>
-      <div class="absolute bottom-30 right-0 w-24 h-24 opacity-40">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
-          <path fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
-          <path fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
-          <path fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
+      <div class="ship-container ship-container-3">
+        <svg class="ship ship-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path class="ship-hull" fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
+          <path class="ship-deck" fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
+          <path class="ship-mast" fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
+          <path class="ship-flag" fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
         </svg>
       </div>
     </div>
@@ -82,11 +81,11 @@ export default {
       <div class="flex justify-center mb-6">
         <ApplicationLogo class="text-amber-600" />
       </div>
-      <h2 class="text-3xl font-bold text-center text-amber-600 mb-6 font-pirata">Unirse a la Tripulación</h2>
+      <h2 class="text-3xl font-bold text-center text-amber-600 mb-6">Unirse a la Tripulación</h2>
 
       <form @submit.prevent="submit">
         <div>
-          <InputLabel for="name" value="Nombre" class="text-amber-600" />
+          <InputLabel for="name" value="Nombre" class="text-white" />
           <TextInput
             id="name"
             type="text"
@@ -100,7 +99,7 @@ export default {
         </div>
 
         <div class="mt-4">
-          <InputLabel for="email" value="Correo Electrónico" class="text-amber-600" />
+          <InputLabel for="email" value="Correo Electrónico" class="text-white" />
           <TextInput
             id="email"
             type="email"
@@ -113,7 +112,7 @@ export default {
         </div>
 
         <div class="mt-4">
-          <InputLabel for="password" value="Contraseña" class="text-amber-600" />
+          <InputLabel for="password" value="Contraseña" class="text-white" />
           <TextInput
             id="password"
             type="password"
@@ -126,7 +125,7 @@ export default {
         </div>
 
         <div class="mt-4">
-          <InputLabel for="password_confirmation" value="Confirmar Contraseña" class="text-amber-600" />
+          <InputLabel for="password_confirmation" value="Confirmar Contraseña" class="text-white" />
           <TextInput
             id="password_confirmation"
             type="password"
@@ -171,5 +170,66 @@ export default {
 
 svg {
   animation: glow 4s infinite;
+}
+
+.ship-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ship {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  animation: sail 20s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+}
+
+.ship-hull {
+  animation: float 3s ease-in-out infinite;
+}
+
+.ship-deck {
+  animation: float 3s ease-in-out infinite 0.2s;
+}
+
+.ship-mast {
+  animation: float 3s ease-in-out infinite 0.4s;
+}
+
+.ship-flag {
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes sail {
+  0% {
+    transform: translateX(-150px) translateY(50vh) rotate(5deg);
+  }
+  50% {
+    transform: translateX(calc(100vw + 150px)) translateY(40vh) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(-150px) translateY(50vh) rotate(5deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
 }
 </style>
