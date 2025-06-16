@@ -66,7 +66,13 @@
                   Tablero del oponente
                 </template>
               </h2>
-              <Board :ships="rivalBoard.ships" :shots="rivalBoard.shots" :is-own="false" />
+              <Board 
+                :ships="rivalBoard.ships" 
+                :shots="rivalBoard.shots" 
+                :is-own="false"
+                :is-my-turn="isMyTurn"
+                @attack="handleAttack"
+              />
             </div>
           </div>
 
@@ -97,25 +103,9 @@
 
           <div v-if="game.status === 'playing'" class="text-center">
             <div v-if="isMyTurn" class="mb-4">
-              <label class="block text-amber-600 text-xl mb-2">¡Tu turno de atacar!</label>
-              <div class="flex justify-center items-center space-x-2">
-                <input 
-                  v-model="shot" 
-                  type="text" 
-                  placeholder="Ej: A3" 
-                  class="bg-gray-800 text-amber-100 border-2 border-amber-900 rounded px-4 py-2 focus:outline-none focus:border-amber-600"
-                  :disabled="loading"
-                />
-                <button 
-                  @click="shoot" 
-                  :disabled="loading || !shot"
-                  class="bg-amber-900 hover:bg-amber-800 text-white px-6 py-2 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  ¡Disparar cañón!
-                </button>
-              </div>
-              <div v-if="shotResult !== null" class="mt-2 text-amber-400">
-                {{ shotResult ? '¡Impacto directo!' : '¡Agua!' }}
+              <label class="block text-amber-600 text-xl mb-2">¡Tu turno de atacar! Haz clic en una casilla del tablero del oponente</label>
+              <div v-if="timeLeft <= 10" class="mt-2 text-red-500 animate-pulse">
+                ¡Te quedan {{ timeLeft }} segundos para atacar!
               </div>
             </div>
             <div v-else class="text-amber-600 text-xl">Esperando el ataque del rival...</div>
@@ -220,8 +210,6 @@ export default {
   },
   data() {
     return {
-      shot: '',
-      shotResult: null,
       loading: false,
       pollingInterval: null,
       error: '',
@@ -229,6 +217,8 @@ export default {
       showSurrenderModal: false,
       showCancelModal: false,
       gameToCancel: null,
+      timeLeft: 59,
+      timerInterval: null,
     };
   },
   mounted() {
@@ -303,18 +293,15 @@ export default {
         this.pollingInterval = null;
       }
     },
-    shoot() {
-      if (!this.shot.match(/^[A-H][1-8]$/i)) {
-        this.error = 'Posición inválida. Usa formato como A3.';
-        this.message = '';
-        return;
-      }
+    handleAttack(position) {
+      if (this.loading || !this.isMyTurn) return;
+      
       this.loading = true;
       this.error = '';
       this.message = '';
-      axios.post(`/games/${this.game.id}/move`, { position: this.shot.toUpperCase() })
+      
+      axios.post(`/games/${this.game.id}/move`, { position })
         .then(res => {
-          this.shotResult = res.data.hit;
           this.message = res.data.hit ? '¡Le diste a un barco!' : 'Fallaste.';
           this.error = '';
           Inertia.reload({ only: ['game'] });
@@ -325,7 +312,6 @@ export default {
         })
         .finally(() => {
           this.loading = false;
-          this.shot = '';
         });
     },
     confirmSurrender() {

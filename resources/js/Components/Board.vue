@@ -11,11 +11,19 @@
         <tbody>
           <tr v-for="row in rows" :key="row">
             <th class="w-10 h-10 text-center text-amber-600">{{ row }}</th>
-            <td v-for="col in 8" :key="col" class="w-10 h-10 text-center border border-amber-900/50 relative">
+            <td v-for="col in 8" :key="col" 
+                :class="[
+                  'w-10 h-10 text-center border border-amber-900/50 relative',
+                  !isOwn && isMyTurn && !isShot(row, col) ? 'cursor-pointer hover:bg-amber-900/20 transition-colors' : 'cursor-not-allowed opacity-75'
+                ]"
+                @click="handleCellClick(row, col)">
               <span v-if="isShip(row, col) && isOwn" class="inline-block w-6 h-6 text-2xl">🚢</span>
               <span v-if="isShot(row, col)" :class="shotClass(row, col)" class="inline-block w-7 h-7 text-2xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 {{ isShip(row, col) ? '💥' : '💧' }}
               </span>
+              <div v-if="!isOwn && isMyTurn && !isShot(row, col)" 
+                   class="absolute inset-0 bg-amber-900/10 opacity-0 hover:opacity-100 transition-opacity">
+              </div>
             </td>
           </tr>
         </tbody>
@@ -39,6 +47,10 @@ export default {
     isOwn: {
       type: Boolean,
       default: false
+    },
+    isMyTurn: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -59,10 +71,18 @@ export default {
       } else {
         return 'bg-blue-900/50 text-blue-600'; // fallo
       }
+    },
+    handleCellClick(row, col) {
+      if (!this.isOwn && this.isMyTurn && !this.isShot(row, col)) {
+        this.$emit('attack', row + col);
+      }
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
 </style> 
