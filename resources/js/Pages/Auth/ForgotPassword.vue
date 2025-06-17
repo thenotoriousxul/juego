@@ -36,9 +36,7 @@ export default {
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden">
-    <!-- Elementos decorativos -->
     <div class="absolute inset-0 z-0">
-      <!-- Barcos decorativos -->
       <div class="absolute top-20 left-20 w-32 h-32 opacity-40">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
@@ -97,7 +95,6 @@ export default {
 </template>
 
 <style>
-/* Efecto de brillo en los barcos */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
   50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }

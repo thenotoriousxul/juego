@@ -49,7 +49,6 @@ export default {
   <Head title="Registro" />
 
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden">
-    <!-- Animaciones de barcos y olas al fondo -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <div class="ship-container">
         <svg class="ship" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">

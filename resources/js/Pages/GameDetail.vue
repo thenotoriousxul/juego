@@ -1,8 +1,6 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black relative overflow-hidden">
-    <!-- Elementos decorativos -->
     <div class="absolute inset-0 z-0">
-      <!-- Barcos decorativos -->
       <div class="absolute top-20 left-20 w-32 h-32 opacity-40">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
@@ -41,18 +39,14 @@
             </div>
           </div>
 
-          <!-- Alerta de ataque del oponente -->
           <div v-if="showOpponentAlert && opponentAttackAlert" 
                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 animate-pulse">
             <div class="relative">
-              <!-- Fondo con efecto de explosión -->
               <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-full blur-xl opacity-75 animate-ping"></div>
               
-              <!-- Contenido de la alerta -->
               <div class="relative bg-gray-900/95 backdrop-blur-sm rounded-2xl p-8 border-4 shadow-2xl"
                    :class="opponentAttackAlert.hit ? 'border-red-500 shadow-red-500/50' : 'border-blue-500 shadow-blue-500/50'">
                 
-                <!-- Icono de ataque -->
                 <div class="text-center mb-4">
                   <div class="text-6xl mb-2">
                     {{ opponentAttackAlert.hit ? '💥' : '💧' }}
@@ -63,7 +57,6 @@
                   </div>
                 </div>
                 
-                <!-- Información del ataque -->
                 <div class="text-center text-white">
                   <p class="text-xl mb-2">
                     <span class="text-amber-400 font-bold">{{ opponentAttackAlert.rivalName }}</span>
@@ -76,7 +69,6 @@
                   </p>
                 </div>
                 
-                <!-- Botón para cerrar -->
                 <div class="text-center mt-4">
                   <button @click="showOpponentAlert = false" 
                           class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors">
@@ -87,28 +79,22 @@
             </div>
           </div>
 
-          <!-- Alerta de tu ataque (mensaje) -->
           <div v-if="message" 
                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 animate-pulse">
             <div class="relative">
-              <!-- Fondo con efecto de explosión -->
               <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full blur-xl opacity-75 animate-ping"></div>
               
-              <!-- Contenido de la alerta -->
               <div class="relative bg-gray-900/95 backdrop-blur-sm rounded-2xl p-8 border-4 shadow-2xl border-green-500 shadow-green-500/50">
                 
-                <!-- Icono de ataque -->
                 <div class="text-center mb-4">
                   <div class="text-6xl mb-2">🎯</div>
                   <div class="text-4xl font-bold mb-2 text-green-400">¡TU ATAQUE!</div>
                 </div>
                 
-                <!-- Información del ataque -->
                 <div class="text-center text-white">
                   <p class="text-2xl font-bold text-green-200">{{ message }}</p>
                 </div>
                 
-                <!-- Botón para cerrar -->
                 <div class="text-center mt-4">
                   <button @click="message = ''" 
                           class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors">
@@ -119,28 +105,22 @@
             </div>
           </div>
 
-          <!-- Alerta de error -->
           <div v-if="error" 
                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 animate-pulse">
             <div class="relative">
-              <!-- Fondo con efecto de explosión -->
               <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-xl opacity-75 animate-ping"></div>
               
-              <!-- Contenido de la alerta -->
               <div class="relative bg-gray-900/95 backdrop-blur-sm rounded-2xl p-8 border-4 shadow-2xl border-red-500 shadow-red-500/50">
                 
-                <!-- Icono de error -->
                 <div class="text-center mb-4">
                   <div class="text-6xl mb-2">⚠️</div>
                   <div class="text-4xl font-bold mb-2 text-red-400">¡ERROR!</div>
                 </div>
                 
-                <!-- Información del error -->
                 <div class="text-center text-white">
                   <p class="text-2xl font-bold text-red-200">{{ error }}</p>
                 </div>
                 
-                <!-- Botón para cerrar -->
                 <div class="text-center mt-4">
                   <button @click="error = ''" 
                           class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors">
@@ -170,7 +150,6 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div class="bg-gray-900/50 backdrop-blur-sm rounded-lg p-4 border-2 border-amber-900">
               <h2 class="text-amber-600 text-xl mb-4 text-center">Tu flota</h2>
-              <!-- Indicador de ataque del oponente -->
               <div v-if="showOpponentAlert && opponentAttackAlert" 
                    class="mb-4 p-3 rounded-lg text-center animate-pulse"
                    :class="opponentAttackAlert.hit ? 'bg-red-900/50 border-2 border-red-500' : 'bg-blue-900/50 border-2 border-blue-500'">
@@ -276,7 +255,6 @@
       </div>
     </div>
 
-    <!-- Modal de confirmación de rendición -->
     <div v-if="showSurrenderModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div class="bg-gray-900/90 backdrop-blur-sm rounded-lg p-6 max-w-md w-full border-2 border-amber-900">
         <h3 class="text-xl font-bold text-amber-600 mb-4">¿Estás seguro de que quieres rendirte?</h3>
@@ -298,7 +276,6 @@
       </div>
     </div>
 
-    <!-- Modal de confirmación de cancelación -->
     <div v-if="showCancelModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
       <div class="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
         <h3 class="text-xl font-semibold text-white mb-4">Confirmar Cancelación</h3>
@@ -396,12 +373,10 @@ export default {
     },
     lastMyMove() {
       if (!this.game.moves || this.game.moves.length < 2) return null;
-      // El último movimiento de mi usuario
       return [...this.game.moves].reverse().find(m => m.player_id === this.myId) || null;
     },
     lastRivalMove() {
       if (!this.game.moves || this.game.moves.length < 2) return null;
-      // El último movimiento del rival
       const rival = this.rivalBoard.user_id;
       return [...this.game.moves].reverse().find(m => m.player_id === rival) || null;
     },
@@ -409,7 +384,6 @@ export default {
   methods: {
     startPolling() {
       this.pollingInterval = setInterval(() => {
-        // Hacer polling siempre que la partida no esté terminada
         if (this.game.status !== 'finished') {
           axios.get(`/games/${this.game.id}`)
             .then(response => {
@@ -419,7 +393,6 @@ export default {
               this.game.winner_id = response.data.game.winner_id;
               this.game.moves = response.data.game.moves;
               
-              // Detectar si el oponente hizo un movimiento
               this.detectOpponentAttack(previousMoves);
             })
             .catch(error => {
@@ -443,18 +416,14 @@ export default {
       
       axios.post(`/games/${this.game.id}/move`, { position })
         .then(res => {
-          // Mensaje más detallado y llamativo
           if (res.data.hit) {
             this.showMessageAlert(`¡IMPACTO EN ${position}! 🎯 Has hundido un barco enemigo! 💥`);
-            // Reproducir sonido de acierto
             this.playAttackSound(true);
           } else {
             this.showMessageAlert(`Disparo a ${position} - ¡Fallaste! 💧 El agua se traga tu proyectil.`);
-            // Reproducir sonido de fallo
             this.playAttackSound(false);
           }
           
-          // Actualizar el juego sin recargar la página para mantener la alerta visible
           this.updateGameState();
         })
         .catch(err => {
@@ -529,17 +498,14 @@ export default {
       const currentMoves = this.game.moves || [];
       const rivalId = this.rivalBoard.user_id;
       
-      // Si hay más movimientos que antes, verificar si el último fue del oponente
       if (currentMoves.length > previousMoves.length) {
         const lastMove = currentMoves[currentMoves.length - 1];
         
-        // Si el último movimiento fue del oponente
         if (lastMove.player_id === rivalId) {
           const position = lastMove.position;
           const hit = lastMove.hit;
           const rivalName = this.rivalBoard.user ? this.rivalBoard.user.name : 'Oponente';
           
-          // Crear alerta del oponente
           this.opponentAttackAlert = {
             position: position,
             hit: hit,
@@ -547,13 +513,10 @@ export default {
             timestamp: new Date()
           };
           
-          // Mostrar alerta
           this.showOpponentAlert = true;
           
-          // Reproducir sonido (si está disponible)
           this.playAttackSound(hit);
           
-          // Ocultar alerta después de 5 segundos
           setTimeout(() => {
             this.showOpponentAlert = false;
             this.opponentAttackAlert = null;
@@ -563,7 +526,6 @@ export default {
     },
     
     playAttackSound(hit) {
-      // Intentar reproducir un sonido (si el navegador lo permite)
       try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
@@ -572,20 +534,17 @@ export default {
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
         
-        // Frecuencia diferente según si acertó o falló
         oscillator.frequency.setValueAtTime(hit ? 800 : 400, audioContext.currentTime);
         gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
         
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.3);
       } catch (e) {
-        // Si no se puede reproducir sonido, no hacer nada
         console.log('No se pudo reproducir sonido');
       }
     },
     
     updateGameState() {
-      // Actualizar el estado del juego sin recargar la página
       axios.get(`/games/${this.game.id}`)
         .then(response => {
           this.game.boards = response.data.game.boards;
@@ -600,7 +559,6 @@ export default {
     
     showMessageAlert(message, duration = 5000) {
       this.message = message;
-      // Ocultar la alerta después del tiempo especificado
       setTimeout(() => {
         this.message = '';
       }, duration);
@@ -608,7 +566,6 @@ export default {
     
     showErrorAlert(error, duration = 5000) {
       this.error = error;
-      // Ocultar la alerta después del tiempo especificado
       setTimeout(() => {
         this.error = '';
       }, duration);
@@ -618,14 +575,12 @@ export default {
 </script>
 
 <style>
-/* Efecto de brillo en los barcos */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
   50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
   100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
 }
 
-/* Efecto de vibración para ataques del oponente */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -636,7 +591,6 @@ export default {
   animation: shake 0.5s ease-in-out;
 }
 
-/* Efecto de pulso mejorado */
 @keyframes pulse-strong {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.8; transform: scale(1.05); }

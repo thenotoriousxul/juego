@@ -48,7 +48,6 @@ export default {
   <Head title="Iniciar Sesión" />
 
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black relative overflow-hidden">
-    <!-- Animaciones de barcos y olas al fondo -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <div class="ship-container">
         <svg class="ship" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +139,6 @@ export default {
 </template>
 
 <style scoped>
-/* Estilos para la animación del barco */
 .ship-container {
   position: absolute;
   width: 100%;
@@ -202,7 +200,6 @@ export default {
   }
 }
 
-/* Efecto de olas */
 .ship-container::before {
   content: '';
   position: absolute;

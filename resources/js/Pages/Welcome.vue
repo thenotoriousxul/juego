@@ -21,59 +21,41 @@ defineProps({
   <Head title="Batalla Naval" />
 
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black relative overflow-hidden">
-    <!-- Barco animado -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <div class="ship-container">
         <svg class="ship" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Casco del barco -->
           <path class="ship-hull" fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
-          <!-- Cubierta -->
           <path class="ship-deck" fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
-          <!-- Mástil -->
           <path class="ship-mast" fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
-          <!-- Bandera -->
           <path class="ship-flag" fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
         </svg>
       </div>
       <div class="ship-container ship-container-2">
         <svg class="ship ship-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Casco del barco -->
           <path class="ship-hull" fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
-          <!-- Cubierta -->
           <path class="ship-deck" fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
-          <!-- Mástil -->
           <path class="ship-mast" fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
-          <!-- Bandera -->
           <path class="ship-flag" fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
         </svg>
       </div>
       <div class="ship-container ship-container-3">
         <svg class="ship ship-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Casco del barco -->
           <path class="ship-hull" fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
-          <!-- Cubierta -->
           <path class="ship-deck" fill="#1A0F0A" d="M40,50 L60,50 L50,30 Z"/>
-          <!-- Mástil -->
           <path class="ship-mast" fill="#8B4513" d="M45,30 L55,30 L55,20 L45,20 Z"/>
-          <!-- Bandera -->
           <path class="ship-flag" fill="#D4AF37" d="M50,20 L50,10 L55,15 L50,20 Z"/>
         </svg>
       </div>
     </div>
 
-    <!-- Hero Section -->
     <div class="relative z-10">
-      <!-- Barra de navegación superior -->
       <div class="fixed top-0 left-0 right-0 p-4 bg-gray-900/80 backdrop-blur-sm border-b border-amber-900/50 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-          <!-- Logo/Nombre del juego -->
           <div class="text-2xl font-bold text-amber-600">
             Batalla Naval
           </div>
           
-          <!-- Enlaces de navegación -->
           <div class="flex items-center space-x-4">
-            <!-- Si el usuario está autenticado -->
             <div v-if="auth.user" class="flex items-center space-x-4">
               <span class="text-amber-400 font-medium">Capitán: {{ auth.user.name }}</span>
               <Link 
@@ -92,7 +74,6 @@ defineProps({
               </Link>
             </div>
             
-            <!-- Si el usuario NO está autenticado -->
             <div v-else class="flex items-center space-x-4">
               <Link 
                 v-if="canLogin" 
@@ -121,7 +102,6 @@ defineProps({
           El juego de estrategia naval más emocionante del Caribe. Comanda tu flota, despliega tus barcos y derrota a tus oponentes en batallas navales legendarias.
         </p>
         <div class="flex justify-center space-x-4">
-          <!-- Si el usuario está autenticado, mostrar botón para ir a partidas -->
           <Link 
             v-if="auth.user" 
             :href="route('games.index')" 
@@ -129,7 +109,6 @@ defineProps({
           >
             Jugar Ahora
           </Link>
-          <!-- Si el usuario NO está autenticado, mostrar botón de registro -->
           <Link 
             v-else-if="canRegister" 
             :href="route('register')" 
@@ -141,7 +120,6 @@ defineProps({
       </div>
     </div>
 
-    <!-- Features Section -->
     <div class="bg-gray-900 py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -213,13 +191,11 @@ defineProps({
       </div>
     </div>
 
-    <!-- CTA Section -->
     <div class="bg-gray-900 border-t border-amber-900/50 py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl font-bold text-amber-600 mb-4">¿Listo para comenzar tu aventura?</h2>
         <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Únete a la comunidad de Batalla Naval y comienza a forjar tu leyenda en los mares.</p>
         <div class="flex justify-center space-x-4">
-          <!-- Si el usuario está autenticado, mostrar botón para ir a partidas -->
           <Link 
             v-if="auth.user" 
             :href="route('games.index')" 
@@ -227,7 +203,6 @@ defineProps({
           >
             Jugar Ahora
           </Link>
-          <!-- Si el usuario NO está autenticado, mostrar botón de registro -->
           <Link 
             v-else-if="canRegister" 
             :href="route('register')" 
@@ -246,7 +221,6 @@ defineProps({
   background-color: #2d3748;
 }
 
-/* Estilos para la animación del barco */
 .ship-container {
   position: absolute;
   width: 100%;
@@ -308,7 +282,6 @@ defineProps({
   }
 }
 
-/* Efecto de olas */
 .ship-container::before {
   content: '';
   position: absolute;
@@ -329,7 +302,6 @@ defineProps({
   }
 }
 
-/* Estilos para el segundo barco */
 .ship-container-2 {
   top: 60%;
 }
@@ -351,13 +323,11 @@ defineProps({
   }
 }
 
-/* Ajuste del efecto de olas para el segundo barco */
 .ship-container-2::before {
   height: 80px;
   opacity: 0.7;
 }
 
-/* Estilos para el tercer barco */
 .ship-container-3 {
   top: 85%;
 }
@@ -367,7 +337,6 @@ defineProps({
   transform: scale(0.8);
 }
 
-/* Ajuste del efecto de olas para el tercer barco */
 .ship-container-3::before {
   height: 60px;
   opacity: 0.5;

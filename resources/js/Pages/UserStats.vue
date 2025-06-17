@@ -1,55 +1,40 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black relative overflow-hidden">
-    <!-- Elementos decorativos -->
     <div class="absolute inset-0 z-0">
-      <!-- Barco pirata grande -->
       <div class="absolute bottom-0 right-0 w-[800px] h-[600px] opacity-30">
         <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-          <!-- Casco del barco -->
           <path fill="#2C1810" d="M100,400 L700,400 L650,300 L150,300 Z"/>
           
-          <!-- Cubierta -->
           <path fill="#1A0F0A" d="M150,300 L650,300 L600,250 L200,250 Z"/>
           
-          <!-- Mástil principal -->
           <path fill="#8B4513" d="M400,250 L400,100 L420,100 L420,250 Z"/>
           
-          <!-- Mástil delantero -->
           <path fill="#8B4513" d="M250,250 L250,150 L270,150 L270,250 Z"/>
           
-          <!-- Mástil trasero -->
           <path fill="#8B4513" d="M550,250 L550,180 L570,180 L570,250 Z"/>
           
-          <!-- Velas principales -->
           <path fill="#D4AF37" d="M420,100 L600,180 L420,250 Z"/>
           <path fill="#D4AF37" d="M400,100 L220,180 L400,250 Z"/>
           
-          <!-- Velas delanteras -->
           <path fill="#D4AF37" d="M270,150 L400,200 L270,250 Z"/>
           
-          <!-- Velas traseras -->
           <path fill="#D4AF37" d="M570,180 L700,220 L570,250 Z"/>
           
-          <!-- Bandera pirata -->
           <path fill="#000" d="M400,100 L400,50 L450,50 L400,75 Z"/>
           <path fill="#FFD700" d="M400,75 L420,65 L420,85 Z"/>
           
-          <!-- Ventanas -->
           <circle cx="300" cy="350" r="15" fill="#FFD700"/>
           <circle cx="400" cy="350" r="15" fill="#FFD700"/>
           <circle cx="500" cy="350" r="15" fill="#FFD700"/>
           
-          <!-- Proa decorativa -->
           <path fill="#8B4513" d="M100,400 L100,350 L150,300 L150,400 Z"/>
           <path fill="#D4AF37" d="M100,350 L120,340 L150,300 L150,350 Z"/>
           
-          <!-- Timón -->
           <path fill="#8B4513" d="M650,400 L650,350 L700,400 Z"/>
           <path fill="#D4AF37" d="M650,350 L670,340 L700,400 L650,400 Z"/>
         </svg>
       </div>
       
-      <!-- Barcos pequeños decorativos -->
       <div class="absolute top-10 left-10 w-24 h-24 opacity-40">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
@@ -168,7 +153,6 @@ export default {
 </script>
 
 <style>
-/* Efecto de brillo en el barco */
 @keyframes glow {
   0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
   50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }

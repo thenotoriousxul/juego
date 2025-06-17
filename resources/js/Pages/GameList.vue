@@ -1,8 +1,6 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black relative overflow-hidden">
-    <!-- Elementos decorativos -->
     <div class="absolute inset-0 z-0">
-      <!-- Barcos decorativos -->
       <div class="absolute top-20 left-20 w-32 h-32 opacity-40">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path fill="#2C1810" d="M10,70 L90,70 L80,50 L20,50 Z"/>
@@ -123,7 +121,6 @@
       </div>
     </div>
 
-    <!-- Modal de confirmación de cancelación -->
     <div v-if="showCancelModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
       <div class="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
         <h3 class="text-xl font-semibold text-white mb-4">Confirmar Cancelación</h3>
@@ -177,18 +174,16 @@ export default {
     };
   },
   mounted() {
-    // Iniciar polling cada 5 segundos
     this.startPolling();
   },
   beforeUnmount() {
-    // Limpiar el intervalo cuando el componente se desmonte
     this.stopPolling();
   },
   methods: {
     startPolling() {
       this.pollingInterval = setInterval(() => {
         this.refreshGames();
-      }, 5000); // Actualizar cada 5 segundos
+      }, 3000); 
     },
     stopPolling() {
       if (this.pollingInterval) {
@@ -197,11 +192,9 @@ export default {
       }
     },
     refreshGames() {
-      // Solo actualizar si no hay operaciones en curso y no estamos en proceso de redirección
       if (!this.loading && !this.isRedirecting) {
         this.isRedirecting = true;
         Inertia.reload({ only: ['games'] }).then(() => {
-          // Verificar si alguna partida del usuario cambió a estado 'playing'
           const userGames = this.games.filter(game => 
             game.boards.some(board => board.user_id === this.$page.props.auth.user.id)
           );
@@ -222,12 +215,10 @@ export default {
       axios.post('/games')
         .then(response => {
           this.message = '¡Partida creada exitosamente!';
-          // Redirigir inmediatamente a la vista de la partida
           Inertia.visit(`/games/${response.data.id}`);
         })
         .catch(err => {
           this.error = err.response?.data?.message || 'Error al crear partida';
-          // Si hay un gameId en la respuesta, redirigir a esa partida
           if (err.response?.data?.gameId) {
             setTimeout(() => {
               Inertia.visit(`/games/${err.response.data.gameId}`);
@@ -245,14 +236,11 @@ export default {
       axios.post(`/games/${gameId}/join`)
         .then(response => {
           this.message = response.data.message;
-          // Recargar inmediatamente después de unirse a una partida
           this.refreshGames();
           
-          // Si la partida está en estado 'playing', redirigir inmediatamente
           if (response.data.game && response.data.game.status === 'playing') {
             Inertia.visit(`/games/${gameId}`);
           } else {
-            // Si aún está en espera, esperar un momento antes de recargar
             setTimeout(() => {
               this.refreshGames();
             }, 1000);
@@ -260,7 +248,6 @@ export default {
         })
         .catch(err => {
           this.error = err.response?.data?.message || 'Error al unirse a la partida';
-          // Si hay un gameId en la respuesta, redirigir a esa partida
           if (err.response?.data?.gameId) {
             setTimeout(() => {
               Inertia.visit(`/games/${err.response.data.gameId}`);
@@ -297,7 +284,6 @@ export default {
       axios.delete(`/games/${this.gameToCancel}`)
         .then(() => {
           this.message = 'Partida cancelada exitosamente';
-          // Recargar inmediatamente después de cancelar una partida
           this.refreshGames();
         })
         .catch(err => {

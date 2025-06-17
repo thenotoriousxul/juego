@@ -67,9 +67,9 @@ export default {
     },
     shotClass(row, col) {
       if (this.isShip(row, col)) {
-        return 'bg-red-900/50 text-red-600'; // acierto
+        return 'bg-red-900/50 text-red-600'; 
       } else {
-        return 'bg-blue-900/50 text-blue-600'; // fallo
+        return 'bg-blue-900/50 text-blue-600'; 
       }
     },
     handleCellClick(row, col) {

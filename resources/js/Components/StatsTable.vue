@@ -35,10 +35,8 @@
     </table>
   </div>
 
-  <!-- Modal de detalles de la partida -->
   <div v-if="showModal && selectedGame" class="fixed inset-0 flex items-start justify-center z-50 p-4 overflow-y-auto">
     <div class="bg-gray-900/95 backdrop-blur-sm rounded-xl shadow-2xl w-full max-w-6xl mt-16 mb-8 border-2 border-amber-900">
-      <!-- Encabezado del Modal -->
       <div class="sticky top-0 z-10 bg-gray-900/95 backdrop-blur-sm border-b border-amber-900 p-6 rounded-t-xl">
         <div class="flex justify-between items-center">
           <div>
@@ -54,7 +52,6 @@
       </div>
 
       <div class="p-6 space-y-6 overflow-y-auto">
-        <!-- Resumen de la Partida -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-gray-800/50 rounded-lg p-4 border border-amber-900">
             <div class="flex items-center justify-between">
@@ -89,7 +86,6 @@
           </div>
         </div>
 
-        <!-- Tableros -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-900">
             <h4 class="text-lg font-semibold text-amber-600 mb-4 text-center">Tu tablero</h4>
@@ -109,7 +105,6 @@
           </div>
         </div>
 
-        <!-- Historial de Movimientos -->
         <div class="bg-gray-800/50 rounded-lg p-6 border border-amber-900">
           <h4 class="text-lg font-semibold text-amber-600 mb-4">Historial de Movimientos</h4>
           <div class="overflow-x-auto">

@@ -70,5 +70,4 @@ export default {
 </template>
 
 <style>
-/* No custom font */
 </style> 
