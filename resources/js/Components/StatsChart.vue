@@ -1,7 +1,38 @@
 <template>
   <div class="relative">
     <p class="text-amber-600 text-center mb-4 font-semibold">Presiona las gráficas para ver el historial de partidas</p>
-    <div class="flex justify-center space-x-8">
+    
+    <!-- Mostrar mensaje cuando no hay datos -->
+    <div v-if="total === 0" class="flex flex-col items-center space-y-4">
+      <div class="flex justify-center space-x-8">
+        <div class="w-32 h-32 relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-16 h-full bg-gray-600 rounded-t-lg relative overflow-hidden">
+              <!-- Barra gris opaca para indicar sin datos -->
+              <div class="absolute bottom-0 left-0 right-0 bg-gray-500 h-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-32 h-32 relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-16 h-full bg-gray-600 rounded-t-lg relative overflow-hidden">
+              <!-- Barra gris opaca para indicar sin datos -->
+              <div class="absolute bottom-0 left-0 right-0 bg-gray-500 h-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Texto debajo de las barras -->
+      <div class="text-center">
+        <span class="text-xl font-bold text-amber-400">Sin datos disponibles</span>
+        <p class="text-amber-300 mt-2">Aún no hay registro de partidas para mostrar estadísticas</p>
+      </div>
+    </div>
+
+    <!-- Mostrar gráficas cuando hay datos -->
+    <div v-else class="flex justify-center space-x-8">
       <!-- Gráfica de victorias -->
       <div 
         class="w-32 h-32 relative cursor-pointer transform transition-transform hover:scale-110"

@@ -9,6 +9,10 @@ defineProps({
   canRegister: {
     type: Boolean,
   },
+  auth: {
+    type: Object,
+    required: true
+  }
 });
 </script>
 
@@ -58,13 +62,57 @@ defineProps({
 
     <!-- Hero Section -->
     <div class="relative z-10">
-      <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-        <Link v-if="canLogin" :href="route('login')" class="font-medium text-amber-500 hover:text-amber-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 transition-colors duration-200">Iniciar sesión</Link>
-
-        <Link v-if="canRegister" :href="route('register')" class="ml-4 font-medium text-amber-500 hover:text-amber-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 transition-colors duration-200">Registrarse</Link>
+      <!-- Barra de navegación superior -->
+      <div class="fixed top-0 left-0 right-0 p-4 bg-gray-900/80 backdrop-blur-sm border-b border-amber-900/50 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+          <!-- Logo/Nombre del juego -->
+          <div class="text-2xl font-bold text-amber-600">
+            Batalla Naval
+          </div>
+          
+          <!-- Enlaces de navegación -->
+          <div class="flex items-center space-x-4">
+            <!-- Si el usuario está autenticado -->
+            <div v-if="auth.user" class="flex items-center space-x-4">
+              <span class="text-amber-400 font-medium">Capitán: {{ auth.user.name }}</span>
+              <Link 
+                :href="route('games.index')" 
+                class="font-medium text-amber-500 hover:text-amber-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 transition-colors duration-200"
+              >
+                Partidas
+              </Link>
+              <Link 
+                :href="route('logout')" 
+                method="post" 
+                as="button"
+                class="font-medium text-red-400 hover:text-red-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 transition-colors duration-200"
+              >
+                Cerrar sesión
+              </Link>
+            </div>
+            
+            <!-- Si el usuario NO está autenticado -->
+            <div v-else class="flex items-center space-x-4">
+              <Link 
+                v-if="canLogin" 
+                :href="route('login')" 
+                class="font-medium text-amber-500 hover:text-amber-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 transition-colors duration-200"
+              >
+                Iniciar sesión
+              </Link>
+              <Link 
+                v-if="canRegister" 
+                :href="route('register')" 
+                class="font-medium text-amber-500 hover:text-amber-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-amber-500 transition-colors duration-200"
+              >
+                Registrarse
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 text-center">
         <h1 class="text-5xl font-bold text-amber-600 mb-6">
           Batalla Naval
         </h1>
@@ -72,7 +120,20 @@ defineProps({
           El juego de estrategia naval más emocionante del Caribe. Comanda tu flota, despliega tus barcos y derrota a tus oponentes en batallas navales legendarias.
         </p>
         <div class="flex justify-center space-x-4">
-          <Link v-if="canRegister" :href="route('register')" class="bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white px-8 py-3 rounded-md text-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-amber-900/50">
+          <!-- Si el usuario está autenticado, mostrar botón para ir a partidas -->
+          <Link 
+            v-if="auth.user" 
+            :href="route('games.index')" 
+            class="bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white px-8 py-3 rounded-md text-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-amber-900/50"
+          >
+            Jugar Ahora
+          </Link>
+          <!-- Si el usuario NO está autenticado, mostrar botón de registro -->
+          <Link 
+            v-else-if="canRegister" 
+            :href="route('register')" 
+            class="bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white px-8 py-3 rounded-md text-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-amber-900/50"
+          >
             Comenzar
           </Link>
         </div>
@@ -157,7 +218,20 @@ defineProps({
         <h2 class="text-3xl font-bold text-amber-600 mb-4">¿Listo para comenzar tu aventura?</h2>
         <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Únete a la comunidad de Batalla Naval y comienza a forjar tu leyenda en los mares.</p>
         <div class="flex justify-center space-x-4">
-          <Link v-if="canRegister" :href="route('register')" class="bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white px-8 py-3 rounded-md text-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-amber-900/50">
+          <!-- Si el usuario está autenticado, mostrar botón para ir a partidas -->
+          <Link 
+            v-if="auth.user" 
+            :href="route('games.index')" 
+            class="bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white px-8 py-3 rounded-md text-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-amber-900/50"
+          >
+            Jugar Ahora
+          </Link>
+          <!-- Si el usuario NO está autenticado, mostrar botón de registro -->
+          <Link 
+            v-else-if="canRegister" 
+            :href="route('register')" 
+            class="bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white px-8 py-3 rounded-md text-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-amber-900/50"
+          >
             Crear cuenta
           </Link>
         </div>
