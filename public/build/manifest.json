@@ -1,78 +1,71 @@
 {
   "Board.css": {
-    "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
+    "file": "assets/Board-3517b0a3.css",
+    "src": "Board.css"
   },
-  "MainMenu.css": {
-    "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
-  },
-  "_ApplicationLogo-e7285b07.js": {
-    "file": "assets/ApplicationLogo-e7285b07.js",
+  "_ApplicationLogo-70e30c21.js": {
+    "file": "assets/ApplicationLogo-70e30c21.js",
     "imports": [
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app.js"
     ]
   },
-  "_AuthenticatedLayout-daf42527.js": {
-    "file": "assets/AuthenticatedLayout-daf42527.js",
+  "_AuthenticatedLayout-85a086f1.js": {
+    "file": "assets/AuthenticatedLayout-85a086f1.js",
     "imports": [
-      "_ApplicationLogo-e7285b07.js",
+      "_ApplicationLogo-70e30c21.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ]
   },
-  "_Board-4577e4b2.js": {
+  "_Board-1e3747a6.js": {
     "css": [
-      "assets/GameList-1daead16.css"
+      "assets/Board-3517b0a3.css"
     ],
-    "file": "assets/Board-4577e4b2.js",
+    "file": "assets/Board-1e3747a6.js",
     "imports": [
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app.js"
     ]
   },
-  "_Checkbox-9a4edc26.js": {
-    "file": "assets/Checkbox-9a4edc26.js",
+  "_Checkbox-90474e35.js": {
+    "file": "assets/Checkbox-90474e35.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ]
   },
-  "_GuestLayout-a7d05a75.js": {
-    "file": "assets/GuestLayout-a7d05a75.js",
+  "_GuestLayout-f17dd88e.js": {
+    "file": "assets/GuestLayout-f17dd88e.js",
     "imports": [
-      "_ApplicationLogo-e7285b07.js",
+      "_ApplicationLogo-70e30c21.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ]
   },
-  "_InputLabel-a9d170b1.js": {
-    "file": "assets/InputLabel-a9d170b1.js",
+  "_InputLabel-5d5fd946.js": {
+    "file": "assets/InputLabel-5d5fd946.js",
     "imports": [
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app.js"
     ]
   },
-  "_MainMenu-36c3e97b.js": {
-    "css": [
-      "assets/GameList-1daead16.css"
-    ],
-    "file": "assets/MainMenu-36c3e97b.js",
+  "_MainMenu-ccba6fe5.js": {
+    "file": "assets/MainMenu-ccba6fe5.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ]
   },
-  "_PrimaryButton-851e3ec2.js": {
-    "file": "assets/PrimaryButton-851e3ec2.js",
+  "_PrimaryButton-ad400fc9.js": {
+    "file": "assets/PrimaryButton-ad400fc9.js",
     "imports": [
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app.js"
     ]
   },
-  "_TextInput-8b8d8ba0.js": {
-    "file": "assets/TextInput-8b8d8ba0.js",
+  "_TextInput-2c9b5820.js": {
+    "file": "assets/TextInput-2c9b5820.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
@@ -81,63 +74,63 @@
   "__plugin-vue_export-helper-c27b6911.js": {
     "file": "assets/_plugin-vue_export-helper-c27b6911.js"
   },
-  "_index-1e4dae7d.js": {
-    "file": "assets/index-1e4dae7d.js",
+  "_index-7e4f5530.js": {
+    "file": "assets/index-7e4f5530.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/Auth/ConfirmPassword.vue": {
-    "file": "assets/ConfirmPassword-2327373b.js",
+    "file": "assets/ConfirmPassword-18657c52.js",
     "imports": [
-      "_GuestLayout-a7d05a75.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_GuestLayout-f17dd88e.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_ApplicationLogo-e7285b07.js"
+      "_ApplicationLogo-70e30c21.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ConfirmPassword.vue"
   },
   "resources/js/Pages/Auth/ForgotPassword.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/ForgotPassword-9eebe927.css",
+    "src": "resources/js/Pages/GameHistoryView.css"
   },
   "resources/js/Pages/Auth/ForgotPassword.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/ForgotPassword-9eebe927.css"
     ],
-    "file": "assets/ForgotPassword-c33466e6.js",
+    "file": "assets/ForgotPassword-cbdcb133.js",
     "imports": [
-      "_GuestLayout-a7d05a75.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_GuestLayout-f17dd88e.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_ApplicationLogo-e7285b07.js"
+      "_ApplicationLogo-70e30c21.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ForgotPassword.vue"
   },
   "resources/js/Pages/Auth/Login.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/Login-d98dd4b5.css",
+    "src": "resources/js/Pages/Auth/Login.css"
   },
   "resources/js/Pages/Auth/Login.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/Login-d98dd4b5.css"
     ],
-    "file": "assets/Login-d41d25d5.js",
+    "file": "assets/Login-8fad773e.js",
     "imports": [
-      "_ApplicationLogo-e7285b07.js",
-      "_Checkbox-9a4edc26.js",
-      "_GuestLayout-a7d05a75.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_ApplicationLogo-70e30c21.js",
+      "_Checkbox-90474e35.js",
+      "_GuestLayout-f17dd88e.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -145,21 +138,21 @@
     "src": "resources/js/Pages/Auth/Login.vue"
   },
   "resources/js/Pages/Auth/Register.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/Register-f860d0c2.css",
+    "src": "resources/js/Pages/Auth/Register.css"
   },
   "resources/js/Pages/Auth/Register.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/Register-f860d0c2.css"
     ],
-    "file": "assets/Register-0e8ecb6f.js",
+    "file": "assets/Register-cf065da1.js",
     "imports": [
-      "_ApplicationLogo-e7285b07.js",
-      "_Checkbox-9a4edc26.js",
-      "_GuestLayout-a7d05a75.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_ApplicationLogo-70e30c21.js",
+      "_Checkbox-90474e35.js",
+      "_GuestLayout-f17dd88e.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -167,79 +160,79 @@
     "src": "resources/js/Pages/Auth/Register.vue"
   },
   "resources/js/Pages/Auth/ResetPassword.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/ForgotPassword-9eebe927.css",
+    "src": "resources/js/Pages/GameHistoryView.css"
   },
   "resources/js/Pages/Auth/ResetPassword.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/ForgotPassword-9eebe927.css"
     ],
-    "file": "assets/ResetPassword-c4f4b205.js",
+    "file": "assets/ResetPassword-67c5a061.js",
     "imports": [
-      "_GuestLayout-a7d05a75.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_GuestLayout-f17dd88e.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_ApplicationLogo-e7285b07.js"
+      "_ApplicationLogo-70e30c21.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ResetPassword.vue"
   },
   "resources/js/Pages/Auth/VerifyEmail.vue": {
-    "file": "assets/VerifyEmail-cc8e821c.js",
+    "file": "assets/VerifyEmail-9d21d8ae.js",
     "imports": [
       "resources/js/app.js",
-      "_GuestLayout-a7d05a75.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_GuestLayout-f17dd88e.js",
+      "_PrimaryButton-ad400fc9.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_ApplicationLogo-e7285b07.js"
+      "_ApplicationLogo-70e30c21.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/VerifyEmail.vue"
   },
   "resources/js/Pages/Dashboard.vue": {
-    "file": "assets/Dashboard-c713ef16.js",
+    "file": "assets/Dashboard-3ae622a9.js",
     "imports": [
-      "_AuthenticatedLayout-daf42527.js",
+      "_AuthenticatedLayout-85a086f1.js",
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_ApplicationLogo-e7285b07.js"
+      "_ApplicationLogo-70e30c21.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Dashboard.vue"
   },
   "resources/js/Pages/GameDetail.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/GameDetail-c92803a3.css",
+    "src": "resources/js/Pages/GameDetail.css"
   },
   "resources/js/Pages/GameDetail.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/GameDetail-c92803a3.css"
     ],
-    "file": "assets/GameDetail-02c98105.js",
+    "file": "assets/GameDetail-58c303b0.js",
     "imports": [
       "resources/js/app.js",
-      "_index-1e4dae7d.js",
-      "_Board-4577e4b2.js",
-      "_MainMenu-36c3e97b.js",
+      "_index-7e4f5530.js",
+      "_Board-1e3747a6.js",
+      "_MainMenu-ccba6fe5.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/GameDetail.vue"
   },
   "resources/js/Pages/GameHistoryView.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/ForgotPassword-9eebe927.css",
+    "src": "resources/js/Pages/GameHistoryView.css"
   },
   "resources/js/Pages/GameHistoryView.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/ForgotPassword-9eebe927.css"
     ],
-    "file": "assets/GameHistoryView-1f037129.js",
+    "file": "assets/GameHistoryView-1afdbeb9.js",
     "imports": [
-      "_index-1e4dae7d.js",
+      "_index-7e4f5530.js",
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app.js"
     ],
@@ -248,51 +241,21 @@
   },
   "resources/js/Pages/GameList.css": {
     "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
+    "src": "resources/js/Pages/Profile/Edit.css"
   },
   "resources/js/Pages/GameList.vue": {
     "css": [
       "assets/GameList-1daead16.css"
     ],
-    "file": "assets/GameList-b13a9754.js",
+    "file": "assets/GameList-8838b5a9.js",
     "imports": [
       "resources/js/app.js",
-      "_index-1e4dae7d.js",
-      "_MainMenu-36c3e97b.js",
+      "_index-7e4f5530.js",
+      "_MainMenu-ccba6fe5.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/GameList.vue"
-  },
-  "resources/js/Pages/Games/Game.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
-  },
-  "resources/js/Pages/Games/Game.vue": {
-    "css": [
-      "assets/ForgotPassword-fd0de60e.css"
-    ],
-    "file": "assets/Game-ae20e4fa.js",
-    "imports": [
-      "resources/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/Pages/Games/Game.vue"
-  },
-  "resources/js/Pages/Games/Index.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
-  },
-  "resources/js/Pages/Games/Index.vue": {
-    "css": [
-      "assets/ForgotPassword-fd0de60e.css"
-    ],
-    "file": "assets/Index-fd201f6f.js",
-    "imports": [
-      "resources/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/Pages/Games/Index.vue"
   },
   "resources/js/Pages/LocationSelect.css": {
     "file": "assets/LocationSelect-97549c18.css",
@@ -302,7 +265,7 @@
     "css": [
       "assets/LocationSelect-97549c18.css"
     ],
-    "file": "assets/LocationSelect-38d09ca2.js",
+    "file": "assets/LocationSelect-04419c04.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
@@ -312,125 +275,102 @@
   },
   "resources/js/Pages/Profile/Edit.css": {
     "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
+    "src": "resources/js/Pages/Profile/Edit.css"
   },
   "resources/js/Pages/Profile/Edit.vue": {
     "css": [
       "assets/GameList-1daead16.css"
     ],
-    "file": "assets/Edit-d0a6fb9a.js",
+    "file": "assets/Edit-a162a365.js",
     "imports": [
-      "_AuthenticatedLayout-daf42527.js",
+      "_AuthenticatedLayout-85a086f1.js",
       "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
       "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
       "resources/js/app.js",
-      "_ApplicationLogo-e7285b07.js",
+      "_ApplicationLogo-70e30c21.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js"
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Edit.vue"
   },
-  "resources/js/Pages/Profile/Partials/DeleteUserForm.css": {
-    "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
-  },
   "resources/js/Pages/Profile/Partials/DeleteUserForm.vue": {
-    "css": [
-      "assets/GameList-1daead16.css"
-    ],
-    "file": "assets/DeleteUserForm-17aca071.js",
+    "file": "assets/DeleteUserForm-788900c8.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_TextInput-8b8d8ba0.js"
+      "_TextInput-2c9b5820.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.vue"
   },
-  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.css": {
-    "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
-  },
   "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue": {
-    "css": [
-      "assets/GameList-1daead16.css"
-    ],
-    "file": "assets/UpdatePasswordForm-223dddc0.js",
+    "file": "assets/UpdatePasswordForm-e7efec03.js",
     "imports": [
       "resources/js/app.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue"
   },
-  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.css": {
-    "file": "assets/GameList-1daead16.css",
-    "src": "MainMenu.css"
-  },
   "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue": {
-    "css": [
-      "assets/GameList-1daead16.css"
-    ],
-    "file": "assets/UpdateProfileInformationForm-c013c45d.js",
+    "file": "assets/UpdateProfileInformationForm-8da8d9e9.js",
     "imports": [
       "resources/js/app.js",
-      "_TextInput-8b8d8ba0.js",
-      "_InputLabel-a9d170b1.js",
-      "_PrimaryButton-851e3ec2.js",
+      "_TextInput-2c9b5820.js",
+      "_InputLabel-5d5fd946.js",
+      "_PrimaryButton-ad400fc9.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue"
   },
   "resources/js/Pages/UserStats.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
-    "src": "resources/js/Pages/Welcome.css"
+    "file": "assets/UserStats-adb6e9b7.css",
+    "src": "resources/js/Pages/UserStats.css"
   },
   "resources/js/Pages/UserStats.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/UserStats-adb6e9b7.css"
     ],
-    "file": "assets/UserStats-bac9b321.js",
+    "file": "assets/UserStats-302d10e5.js",
     "imports": [
       "__plugin-vue_export-helper-c27b6911.js",
       "resources/js/app.js",
-      "_Board-4577e4b2.js",
-      "_MainMenu-36c3e97b.js"
+      "_Board-1e3747a6.js",
+      "_MainMenu-ccba6fe5.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/UserStats.vue"
   },
   "resources/js/Pages/Welcome.css": {
-    "file": "assets/ForgotPassword-fd0de60e.css",
+    "file": "assets/Welcome-b1eb0f04.css",
     "src": "resources/js/Pages/Welcome.css"
   },
   "resources/js/Pages/Welcome.vue": {
     "css": [
-      "assets/ForgotPassword-fd0de60e.css"
+      "assets/Welcome-b1eb0f04.css"
     ],
-    "file": "assets/Welcome-349cb06b.js",
+    "file": "assets/Welcome-d05eb80d.js",
     "imports": [
-      "resources/js/app.js",
-      "_ApplicationLogo-e7285b07.js",
-      "__plugin-vue_export-helper-c27b6911.js"
+      "resources/js/app.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Welcome.vue"
   },
   "resources/js/app.css": {
-    "file": "assets/app-40f5d946.css",
+    "file": "assets/app-f10a3d0a.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-40f5d946.css"
+      "assets/app-f10a3d0a.css"
     ],
     "dynamicImports": [
       "resources/js/Pages/Auth/ConfirmPassword.vue",
@@ -443,8 +383,6 @@
       "resources/js/Pages/GameDetail.vue",
       "resources/js/Pages/GameHistoryView.vue",
       "resources/js/Pages/GameList.vue",
-      "resources/js/Pages/Games/Game.vue",
-      "resources/js/Pages/Games/Index.vue",
       "resources/js/Pages/LocationSelect.vue",
       "resources/js/Pages/Profile/Edit.vue",
       "resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
@@ -453,7 +391,7 @@
       "resources/js/Pages/UserStats.vue",
       "resources/js/Pages/Welcome.vue"
     ],
-    "file": "assets/app-46bb18e7.js",
+    "file": "assets/app-64c80379.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
