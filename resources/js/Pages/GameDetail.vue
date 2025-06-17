@@ -250,7 +250,7 @@
               @click="showSurrenderModal = true"
               class="bg-red-900 hover:bg-red-800 text-white px-6 py-2 rounded transition"
             >
-              Rendirse
+              Abandonar partida
             </button>
           </div>
           <div v-else-if="game.status === 'waiting'" class="text-amber-600 text-xl">Esperando a que se una un rival...</div>
