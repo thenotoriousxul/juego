@@ -13,12 +13,10 @@ class GameHistoryController extends Controller
         $game = Game::with(['boards.user', 'moves'])
             ->findOrFail($gameId);
 
-        // Verificar que el usuario actual sea uno de los jugadores
         if (!$game->boards->contains('user_id', auth()->id())) {
             abort(403, 'No tienes permiso para ver este historial');
         }
 
-        // Ordenar los movimientos por fecha
         $moves = $game->moves->sortBy('created_at')->map(function ($move) use ($game) {
             $shooter = $game->boards->firstWhere('user_id', $move->user_id);
             $target = $game->boards->firstWhere('user_id', '!=', $move->user_id);

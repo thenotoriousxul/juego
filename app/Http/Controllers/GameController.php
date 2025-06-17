@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
-    // Listar todos los juegos (en los que participa el usuario o disponibles para unirse)
     public function index()
     {
         $userId = Auth::id();
@@ -26,12 +25,10 @@ class GameController extends Controller
         ]);
     }
 
-    // Crear un nuevo juego y asignar el usuario como primer jugador
     public function store(Request $request)
     {
         $userId = Auth::id();
         
-        // Verificar si el usuario ya tiene una partida activa (waiting o playing)
         $activeGame = Game::whereHas('boards', function($q) use ($userId) {
             $q->where('user_id', $userId);
         })->whereIn('status', ['waiting', 'playing'])->first();
@@ -45,7 +42,6 @@ class GameController extends Controller
 
         return DB::transaction(function() use ($userId) {
             $game = Game::create(['status' => 'waiting']);
-            // Generar barcos aleatorios para el tablero
             $ships = $this->generateRandomShips();
             Board::create([
                 'game_id' => $game->id,
@@ -60,12 +56,10 @@ class GameController extends Controller
         });
     }
 
-    // Unirse a un juego existente (si hay espacio)
     public function join(Request $request, $gameId)
     {
         $userId = Auth::id();
         
-        // Verificar si el usuario ya tiene una partida activa (waiting o playing)
         $activeGame = Game::whereHas('boards', function($q) use ($userId) {
             $q->where('user_id', $userId);
         })->whereIn('status', ['waiting', 'playing'])->first();
@@ -79,7 +73,6 @@ class GameController extends Controller
 
         $game = Game::findOrFail($gameId);
         
-        // Verificar que el juego esté en estado waiting
         if ($game->status !== 'waiting') {
             return response()->json(['message' => 'Esta partida ya no está disponible para unirse'], 400);
         }
@@ -92,7 +85,6 @@ class GameController extends Controller
             return response()->json(['message' => 'El juego ya tiene dos jugadores'], 400);
         }
         
-        // Generar barcos aleatorios para el tablero
         $ships = $this->generateRandomShips();
         Board::create([
             'game_id' => $game->id,
@@ -103,7 +95,6 @@ class GameController extends Controller
         
         $game->update(['status' => $game->boards()->count() == 2 ? 'playing' : 'waiting']);
         
-        // Si la partida está completa, notificar a ambos jugadores
         if ($game->status === 'playing') {
             $game->load('boards.user');
             $players = $game->boards->pluck('user.name')->join(' y ');
@@ -116,17 +107,14 @@ class GameController extends Controller
         ]);
     }
 
-    // Ver detalle de un juego
     public function show($gameId)
     {
         $userId = Auth::id();
         $game = Game::with(['boards.user', 'moves.user'])->findOrFail($gameId);
-        // Validar que el usuario sea jugador de la partida
         if (!$game->boards->pluck('user_id')->contains($userId)) {
             abort(403, 'No tienes permiso para ver esta partida');
         }
         
-        // Transformar movimientos para el frontend
         $moves = $game->moves->sortBy('created_at')->map(function ($move) {
             return [
                 'id' => $move->id,
@@ -139,7 +127,6 @@ class GameController extends Controller
             ];
         })->values();
         
-        // Si la petición es AJAX, devolver JSON
         if (request()->ajax()) {
             return response()->json([
                 'game' => [
@@ -163,13 +150,12 @@ class GameController extends Controller
         ]);
     }
 
-    // Generar barcos aleatorios para el tablero (8x8, 15 barcos)
     private function generateRandomShips()
     {
         $ships = [];
         $positions = [];
         while (count($ships) < 15) {
-            $row = chr(rand(65, 72)); // A-H
+            $row = chr(rand(65, 72));
             $col = rand(1, 8);
             $pos = $row . $col;
             if (!in_array($pos, $positions)) {
@@ -180,7 +166,6 @@ class GameController extends Controller
         return $ships;
     }
 
-    // Manejar la rendición de un jugador
     public function surrender($gameId)
     {
         $userId = auth()->id();

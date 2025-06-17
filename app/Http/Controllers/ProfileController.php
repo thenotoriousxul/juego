@@ -62,12 +62,10 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    // Página de estadísticas del usuario
     public function stats()
     {
         $userId = auth()->id();
         
-        // Obtener todas las partidas del usuario
         $games = Game::with(['boards.user', 'moves.user', 'winner'])
             ->whereHas('boards', function($query) use ($userId) {
                 $query->where('user_id', $userId);
@@ -76,7 +74,6 @@ class ProfileController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        // Separar partidas ganadas y perdidas
         $wonGames = $games->filter(function($game) use ($userId) {
             return $game->winner_id === $userId;
         })->map(function($game) use ($userId) {
@@ -144,7 +141,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    // Detalle de historial de una partida
     public function gameHistory($gameId)
     {
         $userId = Auth::id();
